@@ -8,10 +8,13 @@
 
 import UIKit
 
+
 class HobbiesViewController: UIViewController {
 
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var hobbieDictionary = [String: Bool]()
+    var navigationBarAppearace = UINavigationBar.appearance()
+    
     
     @IBOutlet weak var outdoorAndAdventure: UISwitch!
     @IBOutlet weak var technology: UISwitch!
@@ -24,6 +27,7 @@ class HobbiesViewController: UIViewController {
     @IBOutlet weak var dancing: UISwitch!
     @IBOutlet weak var gaming: UISwitch!
     @IBOutlet weak var photography: UISwitch!
+ 
     
     // unused currently
     @IBAction func `switch`(_ sender: Any)
@@ -74,6 +78,7 @@ class HobbiesViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         print("Hobbies View Loaded")
+     
     }
 
     override func didReceiveMemoryWarning()

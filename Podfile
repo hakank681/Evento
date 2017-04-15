@@ -8,5 +8,7 @@ target 'HK-FYP' do
   # Pods for HK-FYP
   
   pod 'IQKeyboardManagerSwift'
+  pod 'DZNPhotoPickerController'
+ 
 
 end

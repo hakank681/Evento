@@ -30,6 +30,16 @@ class FavouritesViewController: UIViewController
     var hobbieDict = [String : Bool]()
     let hobbyNames: [String] = ["careerAndBusiness", "dancing", "fashionAndBeauty", "film", "foodAndDrink", "gaming", "music", "outdoorAndAdventure", "photography", "sportsAndFitness", "technology"]
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Hide the navigation bar on the this view controller
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+      
+    }
+    
+    
+    
     //check if switch changes
     func switchIsChanged(mySwitch: UISwitch) -> Bool
     {

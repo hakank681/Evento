@@ -20,8 +20,7 @@ class FinalRegistrationViewController: UIViewController, UINavigationControllerD
     @IBOutlet weak var lastName: UITextField!
     @IBOutlet weak var userName: UITextField!
     
-   
-    
+
     //Get Email and Hobbies
     func getData() -> (String, String, Dictionary<String, Bool>)
     {
@@ -48,11 +47,15 @@ class FinalRegistrationViewController: UIViewController, UINavigationControllerD
     {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage
         {
+
             profileImage.image = image
         }
     
         self.dismiss(animated: true, completion: nil)
     }
+ 
+    
+
  
     
     @IBOutlet weak var profileImage: UIImageView!
@@ -128,6 +131,7 @@ class FinalRegistrationViewController: UIViewController, UINavigationControllerD
         }
         else
         {
+            //save geolocation for postcode
             appDelegate.postcode = postcodeField.text!
             geocoder.geocodeAddressString(address!) { (placemarks, error) in
                 if error != nil
@@ -183,8 +187,10 @@ class FinalRegistrationViewController: UIViewController, UINavigationControllerD
                 activityIndicator.startAnimating()
                 UIApplication.shared.beginIgnoringInteractionEvents()
                 
-                let imageData = UIImageJPEGRepresentation(uploadImage, 0.5)
-                let imageFile = PFFile(name: "profile.jpeg", data: imageData!)
+                let imageData2 = UIImageJPEGRepresentation(uploadImage, 0.75)
+                //let imageData2 = UIImagePNGRepresentation(uploadImage)
+                
+                let imageFile = PFFile(name: "profile.jpeg", data: imageData2!)
 
                 user?["profileImage"] = imageFile
                 user?.saveInBackground(block: { (sucess, error) in
@@ -238,6 +244,13 @@ class FinalRegistrationViewController: UIViewController, UINavigationControllerD
     {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.profileImage.layer.borderWidth = 1
+        self.profileImage.layer.masksToBounds = false
+        self.profileImage.layer.borderWidth = 3
+        self.profileImage.layer.borderColor = UIColor.white.cgColor
+        self.profileImage.layer.cornerRadius = self.profileImage.frame.height/2
+        self.profileImage.layer.cornerRadius = self.profileImage.frame.width/2
+        self.profileImage.clipsToBounds = true
     }
 
     override func didReceiveMemoryWarning()

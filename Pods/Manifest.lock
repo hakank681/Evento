@@ -1,12 +1,46 @@
 PODS:
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
+    - AFNetworking/NSURLSession
+  - DZNEmptyDataSet (1.8.1)
+  - DZNPhotoPickerController (2.0):
+    - DZNPhotoPickerController/Core (= 2.0)
+  - DZNPhotoPickerController/Core (2.0):
+    - DZNEmptyDataSet (~> 1.7)
+    - DZNPhotoPickerController/Editor
+    - DZNPhotoPickerController/Services
+    - SDWebImage (~> 3.7)
+  - DZNPhotoPickerController/Editor (2.0)
+  - DZNPhotoPickerController/Services (2.0):
+    - AFNetworking (~> 3.0)
   - IQKeyboardManagerSwift (4.0.8)
+  - SDWebImage (3.8.2):
+    - SDWebImage/Core (= 3.8.2)
+  - SDWebImage/Core (3.8.2)
 
 DEPENDENCIES:
+  - DZNPhotoPickerController
   - IQKeyboardManagerSwift
 
 SPEC CHECKSUMS:
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
+  DZNPhotoPickerController: 1a9b83a53a2f35094e35c163417ab0aeb8653fd1
   IQKeyboardManagerSwift: c04bc9f68473823f825eb44d958fce98d921bead
+  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
 
-PODFILE CHECKSUM: 9202e9b302a3197752fa3af30e42399dd2d78318
+PODFILE CHECKSUM: 368502da6fa2d906ad9c0b4ce42acdf2bfcdf9e2
 
 COCOAPODS: 1.2.0

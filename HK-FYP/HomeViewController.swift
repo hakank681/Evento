@@ -22,15 +22,37 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     let geocoder = CLGeocoder()
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Hide the navigation bar on the this view controller
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Show the navigation bar on other view controllers
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     @IBAction func logoutButton(_ sender: Any)
     {
         PFUser.logOut()
-        performSegue(withIdentifier: "logout", sender: self)
+        //performSegue(withIdentifier: "logout", sender: self)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewController(withIdentifier: "firstView") as! ViewController
+        self.present(controller, animated: true, completion: { () -> Void in
+        })
+     
     }
     
     @IBAction func favButton(_ sender: Any)
     {
         performSegue(withIdentifier: "toFavs", sender: self)
+        
+       
     }
     
     
@@ -49,6 +71,9 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+      
+        
         let currentUser = PFUser.current()
     
         if let profileImage = currentUser?.object(forKey: "profileImage") as? PFFile
@@ -62,6 +87,13 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
                 {
                     let finalImage = UIImage(data: data!)
                     self.profilePicture.image = finalImage
+                    self.profilePicture.layer.borderWidth = 1
+                    self.profilePicture.layer.masksToBounds = false
+                    self.profilePicture.layer.borderWidth = 3
+                    self.profilePicture.layer.borderColor = UIColor.white.cgColor
+                    self.profilePicture.layer.cornerRadius = self.profilePicture.frame.height/2
+                    self.profilePicture.layer.cornerRadius = self.profilePicture.frame.width/2
+                    self.profilePicture.clipsToBounds = true
                     print("imagSet")
                 }
             }

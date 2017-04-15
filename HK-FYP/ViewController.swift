@@ -21,11 +21,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var nextButtonOutlet: UIButton!
     
-    //email Validity Checker
-    func isValidEmail(testStr:String) -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
-        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailTest.evaluate(with: testStr)
+    
+    
+    
+    //email validity vhecker
+    func emailValid(emailString:String) -> Bool {
+        let regularExpression = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+        let tester = NSPredicate(format:"SELF MATCHES %@", regularExpression)
+        return tester.evaluate(with: emailString)
     }
     
     //Alert Creator function
@@ -90,7 +93,7 @@ class ViewController: UIViewController {
             if let emailtext = emailTextField.text
             {
               
-                if isValidEmail(testStr: emailtext) == false
+                if emailValid(emailString: emailtext) == false
                 {
                     createAlert(title: "Error In Form", message: "Please enter a valid email address")
                 }
@@ -190,14 +193,16 @@ class ViewController: UIViewController {
         if signupMode == true
         {
             // change to log in mode
-            nextButtonOutlet.setTitle("Log In", for: [])
+            let loginImage = UIImage(named: "loginButton.png")
+            nextButtonOutlet.setImage(loginImage, for: [])
             haveAnAccountOutlet.setTitle("Dont have an account?", for: [])
             signupMode = false
         }
         else
         {
             // change to signup mode
-            nextButtonOutlet.setTitle("Next", for: [])
+            let nextImage = UIImage(named: "nextButton.png")
+            nextButtonOutlet.setImage(nextImage, for: [])
             haveAnAccountOutlet.setTitle("Already have an account?", for: [])
             signupMode = true
         }

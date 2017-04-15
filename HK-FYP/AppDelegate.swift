@@ -22,6 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var userPassword = ""
     var hobbies = [String: Bool]()
     var postcode = ""
+    var rowId = ""
+    var attendingUsername = ""
+    var clickedCategory = ""
+    var clickedMapEvent = ""
+    var clickedMapEventId = ""
     
     //var window: UIWindow?
     
@@ -64,6 +69,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // If you would like all objects to be private by default, remove this line.
         defaultACL.getPublicReadAccess = true
+        defaultACL.getPublicWriteAccess = true
+        
 
         PFACL.setDefault(defaultACL, withAccessForCurrentUser: true)
 
