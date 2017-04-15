@@ -48,14 +48,13 @@
 		F9C326651E7AF04100EC2126 /* careerAndBusiness.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C3265E1E7AF04100EC2126 /* careerAndBusiness.png */; };
 		F9C326661E7AF04100EC2126 /* technology.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C3265F1E7AF04100EC2126 /* technology.png */; };
 		F9C326681E7AF13D00EC2126 /* fashionAndBeauty.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C326671E7AF13D00EC2126 /* fashionAndBeauty.png */; };
-		F9C3266A1E7AF20F00EC2126 /* outdooradventure.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C326691E7AF20F00EC2126 /* outdooradventure.png */; };
+		F9C3266A1E7AF20F00EC2126 /* outdoorAndAdventure.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C326691E7AF20F00EC2126 /* outdoorAndAdventure.png */; };
 		F9C3266C1E7AF26800EC2126 /* sportsAndFitness.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C3266B1E7AF26800EC2126 /* sportsAndFitness.png */; };
 		F9C3266E1E7AF30800EC2126 /* foodAndDrink.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C3266D1E7AF30800EC2126 /* foodAndDrink.png */; };
 		F9C326701E7AF37400EC2126 /* avatar1.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C3266F1E7AF37400EC2126 /* avatar1.png */; };
 		F9C326721E7AF3B900EC2126 /* photography.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C326711E7AF3B900EC2126 /* photography.png */; };
 		F9C326741E7B16BC00EC2126 /* CategoryResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C326731E7B16BC00EC2126 /* CategoryResultTableViewController.swift */; };
 		F9C326761E7B45C400EC2126 /* CatEventDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C326751E7B45C400EC2126 /* CatEventDetailsViewController.swift */; };
-		F9C326781E7B4DF700EC2126 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = F9C326771E7B4DF700EC2126 /* back.png */; };
 		F9D641511E988A7400664B34 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F9D6413F1E988A7400664B34 /* Icon-60@2x.png */; };
 		F9D641521E988A7400664B34 /* Icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F9D641401E988A7400664B34 /* Icon-60@3x.png */; };
 		F9D641531E988A7400664B34 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = F9D641411E988A7400664B34 /* Icon-72.png */; };
@@ -99,10 +98,10 @@
 		ED1DA9F2CEF343D19928B006 /* Pods_HK_FYP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HK_FYP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9768DB71E7B980700CF7776 /* CatAttendingListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatAttendingListTableViewController.swift; sourceTree = "<group>"; };
 		F9768DB91E80343200CF7776 /* CatOtherUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatOtherUserViewController.swift; sourceTree = "<group>"; };
-		F9768DBD1E81C49800CF7776 /* loginButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginButton.png; sourceTree = "<group>"; };
-		F9768DBF1E81C4EC00CF7776 /* nextButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nextButton.png; sourceTree = "<group>"; };
-		F9768DC11E81C8A400CF7776 /* AddButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddButton.png; sourceTree = "<group>"; };
-		F9768DC31E81CAFB00CF7776 /* whosgoingButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whosgoingButton.png; sourceTree = "<group>"; };
+		F9768DBD1E81C49800CF7776 /* loginButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = loginButton.png; path = Buttons/loginButton.png; sourceTree = "<group>"; };
+		F9768DBF1E81C4EC00CF7776 /* nextButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nextButton.png; path = Buttons/nextButton.png; sourceTree = "<group>"; };
+		F9768DC11E81C8A400CF7776 /* AddButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AddButton.png; path = Buttons/AddButton.png; sourceTree = "<group>"; };
+		F9768DC31E81CAFB00CF7776 /* whosgoingButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = whosgoingButton.png; path = Buttons/whosgoingButton.png; sourceTree = "<group>"; };
 		F9A8698D1E6B55D800229FF7 /* FinalRegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalRegistrationViewController.swift; sourceTree = "<group>"; };
 		F9A8698F1E6B61BD00229FF7 /* HobbiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HobbiesViewController.swift; path = ../HobbiesViewController.swift; sourceTree = "<group>"; };
 		F9A869911E70861000229FF7 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -120,21 +119,20 @@
 		F9C3262B1E7790E400EC2126 /* AttendingListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttendingListTableViewController.swift; sourceTree = "<group>"; };
 		F9C3262D1E7A123100EC2126 /* OtherUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherUserViewController.swift; sourceTree = "<group>"; };
 		F9C326571E7AEDDF00EC2126 /* CategorySearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategorySearchViewController.swift; sourceTree = "<group>"; };
-		F9C326591E7AF04100EC2126 /* dancing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dancing.png; sourceTree = "<group>"; };
-		F9C3265A1E7AF04100EC2126 /* film.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = film.png; sourceTree = "<group>"; };
-		F9C3265B1E7AF04100EC2126 /* gaming.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gaming.png; sourceTree = "<group>"; };
-		F9C3265C1E7AF04100EC2126 /* music.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music.png; sourceTree = "<group>"; };
-		F9C3265E1E7AF04100EC2126 /* careerAndBusiness.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = careerAndBusiness.png; sourceTree = "<group>"; };
-		F9C3265F1E7AF04100EC2126 /* technology.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = technology.png; sourceTree = "<group>"; };
-		F9C326671E7AF13D00EC2126 /* fashionAndBeauty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fashionAndBeauty.png; sourceTree = "<group>"; };
-		F9C326691E7AF20F00EC2126 /* outdooradventure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = outdooradventure.png; sourceTree = "<group>"; };
-		F9C3266B1E7AF26800EC2126 /* sportsAndFitness.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sportsAndFitness.png; sourceTree = "<group>"; };
-		F9C3266D1E7AF30800EC2126 /* foodAndDrink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = foodAndDrink.png; sourceTree = "<group>"; };
+		F9C326591E7AF04100EC2126 /* dancing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dancing.png; path = EventIcons/dancing.png; sourceTree = "<group>"; };
+		F9C3265A1E7AF04100EC2126 /* film.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = film.png; path = EventIcons/film.png; sourceTree = "<group>"; };
+		F9C3265B1E7AF04100EC2126 /* gaming.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gaming.png; path = EventIcons/gaming.png; sourceTree = "<group>"; };
+		F9C3265C1E7AF04100EC2126 /* music.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = music.png; path = EventIcons/music.png; sourceTree = "<group>"; };
+		F9C3265E1E7AF04100EC2126 /* careerAndBusiness.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = careerAndBusiness.png; path = EventIcons/careerAndBusiness.png; sourceTree = "<group>"; };
+		F9C3265F1E7AF04100EC2126 /* technology.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = technology.png; path = EventIcons/technology.png; sourceTree = "<group>"; };
+		F9C326671E7AF13D00EC2126 /* fashionAndBeauty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fashionAndBeauty.png; path = EventIcons/fashionAndBeauty.png; sourceTree = "<group>"; };
+		F9C326691E7AF20F00EC2126 /* outdoorAndAdventure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = outdoorAndAdventure.png; path = EventIcons/outdoorAndAdventure.png; sourceTree = "<group>"; };
+		F9C3266B1E7AF26800EC2126 /* sportsAndFitness.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sportsAndFitness.png; path = EventIcons/sportsAndFitness.png; sourceTree = "<group>"; };
+		F9C3266D1E7AF30800EC2126 /* foodAndDrink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = foodAndDrink.png; path = EventIcons/foodAndDrink.png; sourceTree = "<group>"; };
 		F9C3266F1E7AF37400EC2126 /* avatar1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar1.png; sourceTree = "<group>"; };
-		F9C326711E7AF3B900EC2126 /* photography.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photography.png; sourceTree = "<group>"; };
+		F9C326711E7AF3B900EC2126 /* photography.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = photography.png; path = EventIcons/photography.png; sourceTree = "<group>"; };
 		F9C326731E7B16BC00EC2126 /* CategoryResultTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryResultTableViewController.swift; sourceTree = "<group>"; };
 		F9C326751E7B45C400EC2126 /* CatEventDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatEventDetailsViewController.swift; sourceTree = "<group>"; };
-		F9C326771E7B4DF700EC2126 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		F9D6413F1E988A7400664B34 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
 		F9D641401E988A7400664B34 /* Icon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@3x.png"; sourceTree = "<group>"; };
 		F9D641411E988A7400664B34 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
@@ -153,8 +151,8 @@
 		F9D6414E1E988A7400664B34 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		F9D6414F1E988A7400664B34 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		F9D641501E988A7400664B34 /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
-		F9D641631E988C0F00664B34 /* FypLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FypLogo.png; sourceTree = "<group>"; };
-		F9D641651E9946D700664B34 /* homeLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = homeLogo.png; sourceTree = "<group>"; };
+		F9D641631E988C0F00664B34 /* FypLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FypLogo.png; path = Logo/FypLogo.png; sourceTree = "<group>"; };
+		F9D641651E9946D700664B34 /* homeLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = homeLogo.png; path = Logo/homeLogo.png; sourceTree = "<group>"; };
 		F9D641671E9947AF00664B34 /* Prime Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Prime Regular.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -231,26 +229,11 @@
 				F9A869951E71D76B00229FF7 /* FavouritesViewController.swift */,
 				F9A8698D1E6B55D800229FF7 /* FinalRegistrationViewController.swift */,
 				F9A869911E70861000229FF7 /* HomeViewController.swift */,
-				F9768DC31E81CAFB00CF7776 /* whosgoingButton.png */,
-				F9768DBD1E81C49800CF7776 /* loginButton.png */,
-				F9768DBF1E81C4EC00CF7776 /* nextButton.png */,
-				F9768DC11E81C8A400CF7776 /* AddButton.png */,
-				F9C326771E7B4DF700EC2126 /* back.png */,
-				F9C326591E7AF04100EC2126 /* dancing.png */,
-				F9C326671E7AF13D00EC2126 /* fashionAndBeauty.png */,
-				F9C326691E7AF20F00EC2126 /* outdooradventure.png */,
-				F9C3266D1E7AF30800EC2126 /* foodAndDrink.png */,
-				F9C3266B1E7AF26800EC2126 /* sportsAndFitness.png */,
-				F9C3265A1E7AF04100EC2126 /* film.png */,
-				F9C3265B1E7AF04100EC2126 /* gaming.png */,
-				F9C3265C1E7AF04100EC2126 /* music.png */,
-				F9C326711E7AF3B900EC2126 /* photography.png */,
-				F9C3265E1E7AF04100EC2126 /* careerAndBusiness.png */,
-				F9C3265F1E7AF04100EC2126 /* technology.png */,
 				F9C3266F1E7AF37400EC2126 /* avatar1.png */,
-				F9D641631E988C0F00664B34 /* FypLogo.png */,
-				F9D641651E9946D700664B34 /* homeLogo.png */,
 				F9D641671E9947AF00664B34 /* Prime Regular.otf */,
+				F91BE67F1EA1D8C50034AF3F /* Buttons */,
+				F91BE67E1EA1D8A60034AF3F /* EventIcons */,
+				F91BE6801EA1D8D00034AF3F /* Logo */,
 				F9D6413E1E988A7400664B34 /* AppIcon.appiconset */,
 			);
 			path = "HK-FYP";
@@ -287,6 +270,44 @@
 				5E99A6E32C20A3D26487549E /* Pods-HK-FYP.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		F91BE67E1EA1D8A60034AF3F /* EventIcons */ = {
+			isa = PBXGroup;
+			children = (
+				F9C326591E7AF04100EC2126 /* dancing.png */,
+				F9C326671E7AF13D00EC2126 /* fashionAndBeauty.png */,
+				F9C326691E7AF20F00EC2126 /* outdoorAndAdventure.png */,
+				F9C3266D1E7AF30800EC2126 /* foodAndDrink.png */,
+				F9C3266B1E7AF26800EC2126 /* sportsAndFitness.png */,
+				F9C3265A1E7AF04100EC2126 /* film.png */,
+				F9C3265B1E7AF04100EC2126 /* gaming.png */,
+				F9C3265C1E7AF04100EC2126 /* music.png */,
+				F9C326711E7AF3B900EC2126 /* photography.png */,
+				F9C3265E1E7AF04100EC2126 /* careerAndBusiness.png */,
+				F9C3265F1E7AF04100EC2126 /* technology.png */,
+			);
+			name = EventIcons;
+			sourceTree = "<group>";
+		};
+		F91BE67F1EA1D8C50034AF3F /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				F9768DC31E81CAFB00CF7776 /* whosgoingButton.png */,
+				F9768DBD1E81C49800CF7776 /* loginButton.png */,
+				F9768DBF1E81C4EC00CF7776 /* nextButton.png */,
+				F9768DC11E81C8A400CF7776 /* AddButton.png */,
+			);
+			name = Buttons;
+			sourceTree = "<group>";
+		};
+		F91BE6801EA1D8D00034AF3F /* Logo */ = {
+			isa = PBXGroup;
+			children = (
+				F9D641631E988C0F00664B34 /* FypLogo.png */,
+				F9D641651E9946D700664B34 /* homeLogo.png */,
+			);
+			name = Logo;
 			sourceTree = "<group>";
 		};
 		F9D6413E1E988A7400664B34 /* AppIcon.appiconset */ = {
@@ -404,11 +425,10 @@
 				F9D641511E988A7400664B34 /* Icon-60@2x.png in Resources */,
 				814C3ACB1B69877600E307BB /* Images.xcassets in Resources */,
 				F9D641591E988A7400664B34 /* Icon-Small-40@2x.png in Resources */,
-				F9C3266A1E7AF20F00EC2126 /* outdooradventure.png in Resources */,
+				F9C3266A1E7AF20F00EC2126 /* outdoorAndAdventure.png in Resources */,
 				F9768DC41E81CAFB00CF7776 /* whosgoingButton.png in Resources */,
 				F9D641551E988A7400664B34 /* Icon-76.png in Resources */,
 				F9D641561E988A7400664B34 /* Icon-76@2x.png in Resources */,
-				F9C326781E7B4DF700EC2126 /* back.png in Resources */,
 				F9768DC01E81C4EC00CF7776 /* nextButton.png in Resources */,
 				F9D641621E988A7400664B34 /* iTunesArtwork@2x in Resources */,
 				F9C326721E7AF3B900EC2126 /* photography.png in Resources */,
