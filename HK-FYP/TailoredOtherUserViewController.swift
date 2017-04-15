@@ -1,24 +1,23 @@
 //
-//  OtherUserViewController.swift
+//  TailoredOtherUserViewController.swift
 //  HK-FYP
 //
-//  Created by Hakan Kilic on 16/03/2017.
+//  Created by Hakan Kilic on 15/04/2017.
 //  Copyright © 2017 Parse. All rights reserved.
 //
 
 import UIKit
 import Parse
 
-class OtherUserViewController: UIViewController
-{
-    
+class TailoredOtherUserViewController: UIViewController {
+
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     @IBOutlet weak var usersName: UILabel!
     @IBOutlet weak var usersImage: UIImageView!
     @IBOutlet weak var usersUsername: UILabel!
     @IBOutlet weak var usersLocation: UILabel!
     let geocoder = CLGeocoder()
-
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -29,7 +28,7 @@ class OtherUserViewController: UIViewController
         query.findObjectsInBackground { (objects, error) in
             if error != nil
             {
-                print(error ?? nil ?? "error")
+                print(error ?? "error")
             }
             else
             {
@@ -116,28 +115,28 @@ class OtherUserViewController: UIViewController
                     }
                     
                     
-
+                    
                 }
             }
         }
     }
     
+    
     override func didReceiveMemoryWarning()
     {
-        
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
 
 }

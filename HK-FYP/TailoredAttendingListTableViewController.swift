@@ -34,7 +34,8 @@ class TailoredAttendingListTableViewController: UITableViewController {
         self.refreshAttenders.removeAll()
         self.userNames.removeAll()
         
-        let closure = refreshNames(completion: {
+        //let closure changed at 20:36
+        _ = refreshNames(completion: {
             
             print("\(self.refreshAttenders) tototototo")
             
@@ -46,15 +47,15 @@ class TailoredAttendingListTableViewController: UITableViewController {
                 userQuery.findObjectsInBackground(block: { (objects, error) in
                     if error != nil
                     {
-                        print(error)
+                        print(error ?? "error")
                     }
                     else
                     {
-                        print(objects)
+                        
                         var i = 0
                         while i < (objects?.count)!
                         {
-                            var currentObject = objects?[i]
+                            let currentObject = objects?[i]
                             self.userNames.append((currentObject!["chosenUsername"] as? String)!)
                             
                             i+=1
@@ -84,7 +85,7 @@ class TailoredAttendingListTableViewController: UITableViewController {
         {
             let object = try query.findObjects()
             print(object)
-            if let values = object[0] as? PFObject
+            if let values = object[0] as PFObject!
             {
                 if let array = values["attenders"] as? [String]
                 {
@@ -106,21 +107,19 @@ class TailoredAttendingListTableViewController: UITableViewController {
         
     }
     
-    
-    @IBAction func addAttendance2(_ sender: Any)
+    @IBAction func addAttendance3(_ sender: Any)
     {
-        
-        let userObjectId = PFUser.current()?.objectId
+        //let userObjectId = PFUser.current()?.objectId
         let query = PFQuery(className: "Events")
         query.whereKey("objectId", equalTo: self.appDelegate.rowId)
         query.findObjectsInBackground { (object, error) in
             if error != nil
             {
-                print(error)
+                print(error ?? "error")
             }
             else
             {
-                print(object)
+               
                 
                 if let eventValues = object?[0]
                 {
@@ -147,9 +146,10 @@ class TailoredAttendingListTableViewController: UITableViewController {
                 }
             }
         }
-        
-        
+
     }
+    
+   
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -221,7 +221,7 @@ class TailoredAttendingListTableViewController: UITableViewController {
             
         }
         
-        performSegue(withIdentifier: "toOtherUser", sender: self)
+        performSegue(withIdentifier: "toTailoredUser", sender: self)
         
         
     }

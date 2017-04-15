@@ -61,7 +61,7 @@ class CatEventDetailsViewController: UIViewController {
         let userLocation1: CLLocation = locations[0]
         let latitude = userLocation1.coordinate.latitude
         let longitude = userLocation1.coordinate.longitude
-        let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        _ = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         
     }
     
@@ -82,17 +82,17 @@ class CatEventDetailsViewController: UIViewController {
         { (action) in
             //this is where the event is deleted
             
-            let userObjectId = PFUser.current()?.objectId
+           //changed 20:23 let userObjectId = PFUser.current()?.objectId
             let query = PFQuery(className: "Events")
             query.whereKey("objectId", equalTo: self.appDelegate.rowId)
             query.findObjectsInBackground { (object, error) in
                 if error != nil
                 {
-                    print(error)
+                    print(error ?? "error")
                 }
                 else
                 {
-                    print(object)
+                   
                     
                     if let eventValues = object?[0]
                     {
@@ -136,17 +136,17 @@ class CatEventDetailsViewController: UIViewController {
         let attendEvent = UIAlertAction(title: "Attend", style: UIAlertActionStyle.default)
         { (action) in
             
-            let userObjectId = PFUser.current()?.objectId
+            //let userObjectId = PFUser.current()?.objectId
             let query = PFQuery(className: "Events")
             query.whereKey("objectId", equalTo: self.appDelegate.rowId)
             query.findObjectsInBackground { (object, error) in
                 if error != nil
                 {
-                    print(error)
+                    print(error ?? "error")
                 }
                 else
                 {
-                    print(object)
+                    
                     
                     if let eventValues = object?[0]
                     {
@@ -197,7 +197,7 @@ class CatEventDetailsViewController: UIViewController {
         print("\(chosenEventId) this")
         
         let query = PFQuery(className: "Events")
-        let object = PFObject(className: "Events")
+        //let object = PFObject(className: "Events")
         query.whereKey("objectId", equalTo: chosenEventId)
         do
         {
@@ -227,7 +227,7 @@ class CatEventDetailsViewController: UIViewController {
                     eventImage.getDataInBackground { (data, error) in
                         if error != nil
                         {
-                            print(error ?? nil)
+                            print(error ?? nil ?? "error")
                         }
                         else
                         {
@@ -251,11 +251,11 @@ class CatEventDetailsViewController: UIViewController {
                     self.geocoder.reverseGeocodeLocation(userLocation) { (placemarks, error) in
                         if error != nil
                         {
-                            print(error)
+                            print(error ?? "error")
                         }
                         else
                         {
-                            if let placemark = placemarks?[0] as? CLPlacemark!
+                            if let placemark = placemarks?[0] as CLPlacemark!
                             {
                                 if let sublocality = placemark.subLocality
                                 {

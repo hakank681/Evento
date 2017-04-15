@@ -24,6 +24,9 @@
 		F9768DC01E81C4EC00CF7776 /* nextButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F9768DBF1E81C4EC00CF7776 /* nextButton.png */; };
 		F9768DC21E81C8A400CF7776 /* AddButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F9768DC11E81C8A400CF7776 /* AddButton.png */; };
 		F9768DC41E81CAFB00CF7776 /* whosgoingButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F9768DC31E81CAFB00CF7776 /* whosgoingButton.png */; };
+		F991ADD71EA270E70075BE0A /* TailoredOtherUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F991ADD61EA270E70075BE0A /* TailoredOtherUserViewController.swift */; };
+		F991ADD91EA292C70075BE0A /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F991ADD81EA292C70075BE0A /* ChangePasswordViewController.swift */; };
+		F991ADDB1EA2A1880075BE0A /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F991ADDA1EA2A1880075BE0A /* ForgotPasswordViewController.swift */; };
 		F9A8698E1E6B55D800229FF7 /* FinalRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A8698D1E6B55D800229FF7 /* FinalRegistrationViewController.swift */; };
 		F9A869901E6B61BD00229FF7 /* HobbiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A8698F1E6B61BD00229FF7 /* HobbiesViewController.swift */; };
 		F9A869921E70861100229FF7 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A869911E70861000229FF7 /* HomeViewController.swift */; };
@@ -102,6 +105,9 @@
 		F9768DBF1E81C4EC00CF7776 /* nextButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nextButton.png; path = Buttons/nextButton.png; sourceTree = "<group>"; };
 		F9768DC11E81C8A400CF7776 /* AddButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AddButton.png; path = Buttons/AddButton.png; sourceTree = "<group>"; };
 		F9768DC31E81CAFB00CF7776 /* whosgoingButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = whosgoingButton.png; path = Buttons/whosgoingButton.png; sourceTree = "<group>"; };
+		F991ADD61EA270E70075BE0A /* TailoredOtherUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TailoredOtherUserViewController.swift; sourceTree = "<group>"; };
+		F991ADD81EA292C70075BE0A /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		F991ADDA1EA2A1880075BE0A /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		F9A8698D1E6B55D800229FF7 /* FinalRegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalRegistrationViewController.swift; sourceTree = "<group>"; };
 		F9A8698F1E6B61BD00229FF7 /* HobbiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HobbiesViewController.swift; path = ../HobbiesViewController.swift; sourceTree = "<group>"; };
 		F9A869911E70861000229FF7 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -209,6 +215,9 @@
 				81BA814A1A49DA1800E65899 /* AppDelegate.swift */,
 				81BA814C1A49DA1800E65899 /* ViewController.swift */,
 				814C3AC61B69877600E307BB /* Main.storyboard */,
+				F991ADDA1EA2A1880075BE0A /* ForgotPasswordViewController.swift */,
+				F991ADD81EA292C70075BE0A /* ChangePasswordViewController.swift */,
+				F991ADD61EA270E70075BE0A /* TailoredOtherUserViewController.swift */,
 				F9AFC4931EA1BEA500DE1F07 /* TailoredEventDetailsViewController.swift */,
 				F9AFC4911EA19B9A00DE1F07 /* TailoredResultsTableViewController.swift */,
 				F9AFC4951EA1C1F100DE1F07 /* TailoredAttendingListTableViewController.swift */,
@@ -505,13 +514,16 @@
 				F9768DB81E7B980700CF7776 /* CatAttendingListTableViewController.swift in Sources */,
 				F9768DBA1E80343200CF7776 /* CatOtherUserViewController.swift in Sources */,
 				F9C3262E1E7A123100EC2126 /* OtherUserViewController.swift in Sources */,
+				F991ADDB1EA2A1880075BE0A /* ForgotPasswordViewController.swift in Sources */,
 				F9A8698E1E6B55D800229FF7 /* FinalRegistrationViewController.swift in Sources */,
 				F9AFC4921EA19B9B00DE1F07 /* TailoredResultsTableViewController.swift in Sources */,
+				F991ADD71EA270E70075BE0A /* TailoredOtherUserViewController.swift in Sources */,
 				F9AFC4901E9FF7B500DE1F07 /* MapUserViewController.swift in Sources */,
 				F9C326741E7B16BC00EC2126 /* CategoryResultTableViewController.swift in Sources */,
 				F9C326281E7584DC00EC2126 /* TableViewController.swift in Sources */,
 				F9A869901E6B61BD00229FF7 /* HobbiesViewController.swift in Sources */,
 				F9AFC48C1E9FE11300DE1F07 /* MapEventDetailsViewController.swift in Sources */,
+				F991ADD91EA292C70075BE0A /* ChangePasswordViewController.swift in Sources */,
 				F9C326261E74764000EC2126 /* AddEventViewController.swift in Sources */,
 				F9AFC48E1E9FF0C100DE1F07 /* MapAttendingListTableViewController.swift in Sources */,
 				F9C3262A1E75AE6B00EC2126 /* EventDetailsViewController.swift in Sources */,

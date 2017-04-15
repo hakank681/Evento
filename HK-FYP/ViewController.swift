@@ -15,11 +15,14 @@ class ViewController: UIViewController {
     var signupMode = true
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var activityIndicator = UIActivityIndicatorView()
+    let userId = PFUser.current()?.objectId
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var haveAnAccountOutlet: UIButton!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var nextButtonOutlet: UIButton!
+    @IBOutlet weak var forgotPasswordOutlet: UIButton!
+    
     
     
     
@@ -42,7 +45,7 @@ class ViewController: UIViewController {
         self.present(missingAlert, animated: true, completion: nil)
     }
     
-
+    
     //User Exists Checker
     func usernameIsTaken(username: String) -> Bool
     {
@@ -68,7 +71,7 @@ class ViewController: UIViewController {
         return isTaken
     }
     
- 
+    
     
     @IBAction func nextButton(_ sender: Any) {
         
@@ -78,7 +81,7 @@ class ViewController: UIViewController {
         activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
-                
+        
         appDelegate.userEmail = emailTextField.text!
         appDelegate.userPassword = passwordTextField.text!
         
@@ -92,7 +95,7 @@ class ViewController: UIViewController {
             //Passes text into email validity checker
             if let emailtext = emailTextField.text
             {
-              
+                
                 if emailValid(emailString: emailtext) == false
                 {
                     createAlert(title: "Error In Form", message: "Please enter a valid email address")
@@ -163,26 +166,18 @@ class ViewController: UIViewController {
                             displayErrorMessage = errorMessage
                         }
                         self.createAlert(title: "Login Error", message: displayErrorMessage)
+                        self.forgotPasswordOutlet.alpha = 1
                     }
                     else
                     {
                         print("Logged in")
                         self.performSegue(withIdentifier: "toHome", sender: self)
-                        let query = PFQuery(className: "Hobbies")
-                        query.whereKey("user", equalTo: PFUser.current()?.objectId)
-                        
-                        query.findObjectsInBackground(block: { (objects, error) in
-                            
-                            if let objects = objects
-                            {
-                                print(objects)
-                            }
-                        })
+                       
                     }
                     
                 })
             }
-
+            
         }
         
     }
@@ -208,6 +203,11 @@ class ViewController: UIViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool)
+    {
+        self.forgotPasswordOutlet.alpha = 0
+    }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -223,7 +223,7 @@ class ViewController: UIViewController {
         textField.resignFirstResponder()
         return true
     }
-
+    
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()

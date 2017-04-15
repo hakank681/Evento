@@ -34,7 +34,7 @@ class MapAttendingListTableViewController: UITableViewController {
         self.refreshAttenders.removeAll()
         self.userNames.removeAll()
         
-        let closure = refreshNames(completion: {
+        _ = refreshNames(completion: {
             
             print("\(self.refreshAttenders) tototototo")
             
@@ -46,15 +46,15 @@ class MapAttendingListTableViewController: UITableViewController {
                 userQuery.findObjectsInBackground(block: { (objects, error) in
                     if error != nil
                     {
-                        print(error)
+                        print(error ?? "error")
                     }
                     else
                     {
-                        print(objects)
+                      
                         var i = 0
                         while i < (objects?.count)!
                         {
-                            var currentObject = objects?[i]
+                            let currentObject = objects?[i]
                             self.userNames.append((currentObject!["chosenUsername"] as? String)!)
                             
                             i+=1
@@ -84,7 +84,7 @@ class MapAttendingListTableViewController: UITableViewController {
         {
             let object = try query.findObjects()
             print(object)
-            if let values = object[0] as? PFObject
+            if let values = object[0] as PFObject!
             {
                 if let array = values["attenders"] as? [String]
                 {
@@ -109,17 +109,17 @@ class MapAttendingListTableViewController: UITableViewController {
     @IBAction func addAttendance3(_ sender: Any)
     {
         
-        let userObjectId = PFUser.current()?.objectId
+        //let userObjectId = PFUser.current()?.objectId
         let query = PFQuery(className: "Events")
         query.whereKey("objectId", equalTo: self.appDelegate.clickedMapEventId)
         query.findObjectsInBackground { (object, error) in
             if error != nil
             {
-                print(error)
+                print(error ?? "error")
             }
             else
             {
-                print(object)
+                
                 
                 if let eventValues = object?[0]
                 {

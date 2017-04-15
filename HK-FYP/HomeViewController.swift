@@ -61,7 +61,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         let userLocation1: CLLocation = locations[0]
         let latitude = userLocation1.coordinate.latitude
         let longitude = userLocation1.coordinate.longitude
-        let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        _ = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         
     }
     
@@ -81,7 +81,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             profileImage.getDataInBackground { (data, error) in
                 if error != nil
                 {
-                    print(error ?? nil)
+                    print(error ?? nil ?? "error")
                 }
                 else
                 {
@@ -120,11 +120,11 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
                 self.geocoder.reverseGeocodeLocation(userLocation) { (placemarks, error) in
                     if error != nil
                     {
-                        print(error)
+                        print(error ?? "error")
                     }
                     else
                     {
-                        if let placemark = placemarks?[0] as? CLPlacemark!
+                        if let placemark = placemarks?[0] as CLPlacemark!
                         {
                             if let sublocality = placemark.subLocality
                             {

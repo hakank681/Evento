@@ -66,7 +66,7 @@ class MapEventDetailsViewController: UIViewController {
         let userLocation1: CLLocation = locations[0]
         let latitude = userLocation1.coordinate.latitude
         let longitude = userLocation1.coordinate.longitude
-        let location = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        _ = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         
     }
     
@@ -83,17 +83,17 @@ class MapEventDetailsViewController: UIViewController {
         { (action) in
             //this is where the event is deleted
             
-            let userObjectId = PFUser.current()?.objectId
+            //changed at 20:21 let userObjectId = PFUser.current()?.objectId
             let query = PFQuery(className: "Events")
             query.whereKey("objectId", equalTo: self.appDelegate.clickedMapEventId)
             query.findObjectsInBackground { (object, error) in
                 if error != nil
                 {
-                    print(error)
+                    print(error ?? "error")
                 }
                 else
                 {
-                    print(object)
+                    
                     
                     if let eventValues = object?[0]
                     {
@@ -137,17 +137,17 @@ class MapEventDetailsViewController: UIViewController {
         let attendEvent = UIAlertAction(title: "Attend", style: UIAlertActionStyle.default)
         { (action) in
             
-            let userObjectId = PFUser.current()?.objectId
+            //let userObjectId = PFUser.current()?.objectId
             let query = PFQuery(className: "Events")
             query.whereKey("objectId", equalTo: self.appDelegate.clickedMapEventId)
             query.findObjectsInBackground { (object, error) in
                 if error != nil
                 {
-                    print(error)
+                    print(error ?? "error")
                 }
                 else
                 {
-                    print(object)
+                    
                     
                     if let eventValues = object?[0]
                     {
@@ -190,7 +190,7 @@ class MapEventDetailsViewController: UIViewController {
         let chosenMapEvent = self.appDelegate.clickedMapEvent
         
         let query = PFQuery(className: "Events")
-        let object = PFObject(className: "Events")
+        //let object = PFObject(className: "Events")
         query.whereKey("title", equalTo: chosenMapEvent)
         do
         {
@@ -226,7 +226,7 @@ class MapEventDetailsViewController: UIViewController {
                     eventImage.getDataInBackground { (data, error) in
                         if error != nil
                         {
-                            print(error ?? nil)
+                            print(error ?? nil ?? "error")
                         }
                         else
                         {
@@ -250,11 +250,11 @@ class MapEventDetailsViewController: UIViewController {
                     self.geocoder.reverseGeocodeLocation(userLocation) { (placemarks, error) in
                         if error != nil
                         {
-                            print(error)
+                            print(error ?? "error")
                         }
                         else
                         {
-                            if let placemark = placemarks?[0] as? CLPlacemark!
+                            if let placemark = placemarks?[0] as CLPlacemark!
                             {
                                 if let sublocality = placemark.subLocality
                                 {

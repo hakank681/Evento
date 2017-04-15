@@ -79,11 +79,10 @@ class EventsOnMapViewController: UIViewController, MKMapViewDelegate, CLLocation
         query.findObjectsInBackground { (objects, error) in
             if error != nil
             {
-                print(error)
+                print(error ?? "error")
             }
             else
             {
-                print(objects)
                 
                 for object in objects!
                 {
@@ -92,7 +91,7 @@ class EventsOnMapViewController: UIViewController, MKMapViewDelegate, CLLocation
                     self.eventLatitudes.append(self.eventGeopoints.last?.latitude as CLLocationDegrees!)
                     self.eventLongitudes.append(self.eventGeopoints.last?.longitude as CLLocationDegrees!)
                     
-                    var annotation = MKPointAnnotation()
+                    let annotation = MKPointAnnotation()
                     annotation.coordinate = CLLocationCoordinate2DMake(self.eventLatitudes.last!, self.eventLongitudes.last!)
                     annotation.title = self.eventNames.last!
                     self.map.addAnnotation(annotation)
