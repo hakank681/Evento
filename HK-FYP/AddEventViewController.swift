@@ -39,17 +39,17 @@ class AddEventViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     @IBAction func addButton(_ sender: Any)
     {
-        
+        //Check if any field is empty
         if categoryTextField.text == "" || nameTextField.text == "" || dateTimeTextField.text == "" || postcodeTextField.text == "" || timeField.text == ""
         {
             createAlert(title: "Missing Form", message: "Please fill all information")
         }
         else
         {
+            //Get formatted category names from dictionary
             if let categoryNameFormat = categoryNameDict[categoryTextField.text!]
             {
                 categoryNameParse = categoryNameFormat
-                print(categoryNameParse)
             }
             let events = PFObject(className: "Events")
             let user = PFUser.current()
@@ -65,6 +65,7 @@ class AddEventViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             let formattedDate = parseDateFormat.date(from: eventDate!)
             let formattedTime = parseTimeFormat.date(from: eventTime!)
             
+            //Set event attributes
             events["category"] = categoryNameParse
             events["title"] = nameTextField.text
             events["address"] = postcodeTextField.text
@@ -75,19 +76,18 @@ class AddEventViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             events["createdBy"] = user?.objectId
             events["attenders"] = self.attendingUsers
             
-            
             //save geolocation of event postcode
             geocoder.geocodeAddressString(address!) { (placemarks, error) in
                 if error != nil
                 {
-                    print(error)
+                    print(error ?? "error")
                 }
                 else
                 {
-                    if let placemark = placemarks?[0] as? CLPlacemark!
+                    if let placemark = placemarks?[0] as CLPlacemark!
                     {
-                        let lat = placemark.location?.coordinate.latitude as! Double!
-                        let lon = placemark.location?.coordinate.longitude as! Double!
+                        let lat = placemark.location?.coordinate.latitude as Double!
+                        let lon = placemark.location?.coordinate.longitude as Double!
                         
                         let userGeopoint = PFGeoPoint(latitude: lat!, longitude: lon!)
                         events["eventGeopoint"] = userGeopoint
@@ -98,35 +98,28 @@ class AddEventViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             
             //save cat image
             let chosenImage = self.catImageDict[categoryNameParse]
-            
-           
-            
+
            // let imageData = UIImageJPEGRepresentation(chosenImage!, 0.5)
             let imageData2 = UIImagePNGRepresentation(chosenImage!)
             let imageFile = PFFile(name: "event.jpeg", data: imageData2!)
-            print(chosenImage)
-            
-            
-            
+
+            //Save event image
             events["eventImage"] = imageFile
             events.saveInBackground(block: { (sucess, error) in
                 
                 if error != nil
                 {
-                    print(error)
+                    print(error ?? "error")
                 }
                 else
                 {
-                    //self.activityIndicator.stopAnimating()
-                    //UIApplication.shared.endIgnoringInteractionEvents()
                     print("image uploaded")
                 }
             })
 
-        
-        
             createAlert(title: "Success", message: "Event has been created")
             
+            //Delete fields, ready to add another event
             categoryTextField.text = ""
             nameTextField.text = ""
             postcodeTextField.text = ""
@@ -142,7 +135,8 @@ class AddEventViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     {
         super.viewDidLoad()
         self.categoryDropdown.isHidden = true
-        // Do any additional setup after loading the view.
+      
+        //Dictionary for formatted category names, useful for Parse Query
         categoryNameDict["Career And Business"] = "careerAndBusiness"
         categoryNameDict["Dancing"] = "dancing"
         categoryNameDict["Fashion And Beauty"] = "fashionAndBeauty"
@@ -162,12 +156,11 @@ class AddEventViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         catImageDict["foodAndDrink"] = UIImage(named: "foodAndDrink.png")
         catImageDict["gaming"] = UIImage(named: "gaming.png")
         catImageDict["music"] = UIImage(named: "music.png")
-        catImageDict["outdoorAndAdventure"] = UIImage(named: "outdooradventure.png")
+        catImageDict["outdoorAndAdventure"] = UIImage(named: "outdoorAndAdventure.png")
         catImageDict["photography"] = UIImage(named: "photography.png")
         catImageDict["sportsAndFitness"] = UIImage(named: "sportsAndFitness")
         catImageDict["technology"] = UIImage(named: "technology")
-        
-        
+    
     }
 
     override func didReceiveMemoryWarning()
@@ -175,11 +168,8 @@ class AddEventViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    
-    
-    //Date and Time Picker----------------------------------
+
+    //Date and Time Picker
     func datePickerChanged(sender: UIDatePicker)
     {
         let formatter = DateFormatter()
@@ -187,7 +177,6 @@ class AddEventViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         formatter.dateFormat = "dd-MM-yyyy"
         self.dateTimeTextField.text = formatter.string(from: sender.date)
         print("Try this at home")
-        
     }
     
     func timePickerChanged(sender: UIDatePicker)
@@ -201,6 +190,7 @@ class AddEventViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
     }
     
+    //Hide keyboard when blank area clicked
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
         self.dateTimeTextField.resignFirstResponder()
@@ -217,8 +207,7 @@ class AddEventViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         closekeyboard()
     }
     
-    
-    //Category Picker-------------------------------------------------------
+    //Category Picker
     public func numberOfComponents(in pickerView: UIPickerView) -> Int
     {
         return 1
@@ -275,20 +264,6 @@ class AddEventViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             timePicker.addTarget(self, action: #selector(timePickerChanged(sender:)), for: .valueChanged)
             
         }
-        
-        
-        
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 }

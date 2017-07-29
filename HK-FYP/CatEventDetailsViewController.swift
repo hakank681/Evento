@@ -13,8 +13,6 @@ import CoreLocation
 
 class CatEventDetailsViewController: UIViewController {
     
-     
-    
     @IBOutlet weak var eventTimeLabel: UILabel!
     @IBOutlet weak var eventDateLabel: UILabel!
     @IBOutlet weak var evenLocationLabel: UILabel!
@@ -34,7 +32,6 @@ class CatEventDetailsViewController: UIViewController {
         let missingAlert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         missingAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
         }))
-        
         self.present(missingAlert, animated: true, completion: nil)
     }
 
@@ -62,9 +59,9 @@ class CatEventDetailsViewController: UIViewController {
         let latitude = userLocation1.coordinate.latitude
         let longitude = userLocation1.coordinate.longitude
         _ = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        
     }
     
+    //Show action sheet
     @IBAction func optionsButton(_ sender: Any)
     {
         self.present(alertController, animated: true, completion: nil)
@@ -73,7 +70,6 @@ class CatEventDetailsViewController: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
         // Attend Event or remove attending
         alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
@@ -82,7 +78,7 @@ class CatEventDetailsViewController: UIViewController {
         { (action) in
             //this is where the event is deleted
             
-           //changed 20:23 let userObjectId = PFUser.current()?.objectId
+            //Query event for attenders array
             let query = PFQuery(className: "Events")
             query.whereKey("objectId", equalTo: self.appDelegate.rowId)
             query.findObjectsInBackground { (object, error) in
@@ -92,51 +88,45 @@ class CatEventDetailsViewController: UIViewController {
                 }
                 else
                 {
-                   
-                    
                     if let eventValues = object?[0]
                     {
-                        
-                        print("hello")
+                        //Get attenders array
                         if let attendingArrayTemp = eventValues["attenders"] as? [String]
                         {
+                            //Check if user attending
                             self.attendingArray = attendingArrayTemp
                             if self.attendingArray.contains(self.attendingUsers!)
                             {
-                                
                                 if let userID = PFUser.current()?.objectId
                                 {
+                                    //Find index of user in attendingArray
                                     if let indexToRemove = self.attendingArray.index(of: userID)
                                     {
+                                        //Remove user
                                         self.attendingArray.remove(at: indexToRemove)
+                                        self.createAlert(title: "Complete", message: "You are no longer attending this event")
                                     }
-                                    
                                 }
-                                
-                                
                             }
                             else
                             {
                                 self.createAlert(title: "Not Attending", message: "You are not attending this event")
-                                
                             }
                         }
-                        print(self.attendingArray)
                         eventValues["attenders"] = []
-                        //eventValues.saveInBackground()
+                        //Update attending array
                         eventValues["attenders"] = self.attendingArray
                         eventValues.saveInBackground()
                     }
                 }
             }
-            
         }
         
         //Add user to attending list
         let attendEvent = UIAlertAction(title: "Attend", style: UIAlertActionStyle.default)
         { (action) in
             
-            //let userObjectId = PFUser.current()?.objectId
+            //Query event for attenders array
             let query = PFQuery(className: "Events")
             query.whereKey("objectId", equalTo: self.appDelegate.rowId)
             query.findObjectsInBackground { (object, error) in
@@ -146,14 +136,12 @@ class CatEventDetailsViewController: UIViewController {
                 }
                 else
                 {
-                    
-                    
                     if let eventValues = object?[0]
                     {
-                        
-                        print("hello")
+                        //Get event attenders array
                         if let attendingArrayTemp = eventValues["attenders"] as? [String]
                         {
+                            //Check if user is attending
                             self.attendingArray = attendingArrayTemp
                             if self.attendingArray.contains(self.attendingUsers!)
                             {
@@ -162,19 +150,16 @@ class CatEventDetailsViewController: UIViewController {
                             else
                             {
                                 self.attendingArray.append(self.attendingUsers!)
-                                print(self.attendingArray)
+                                self.createAlert(title: "Success", message: "You are now attending this event")
                             }
                         }
-                        print(self.attendingArray)
                         eventValues["attenders"] = []
-                        //eventValues.saveInBackground()
+                        //Update attenders array
                         eventValues["attenders"] = self.attendingArray
                         eventValues.saveInBackground()
                     }
                 }
             }
-            
-            
         }
         
         let cancel = UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.cancel) { (action) in
@@ -184,20 +169,10 @@ class CatEventDetailsViewController: UIViewController {
         alertController.addAction(leaveEvent)
         alertController.addAction(attendEvent)
         alertController.addAction(cancel)
-        
-        
 
-        
-        
-        
-        
-        
-        
+        //Query Event and set event details
         let chosenEventId = self.appDelegate.rowId
-        print("\(chosenEventId) this")
-        
         let query = PFQuery(className: "Events")
-        //let object = PFObject(className: "Events")
         query.whereKey("objectId", equalTo: chosenEventId)
         do
         {
@@ -224,6 +199,7 @@ class CatEventDetailsViewController: UIViewController {
                 }
                 if let eventImage = eventValues["eventImage"] as? PFFile
                 {
+                    //Get event image
                     eventImage.getDataInBackground { (data, error) in
                         if error != nil
                         {
@@ -233,19 +209,15 @@ class CatEventDetailsViewController: UIViewController {
                         {
                             let finalImage = UIImage(data: data!)
                             self.eventImageView.image = finalImage
-                            print("imagSet")
+                            print("imageSet")
                         }
                     }
                 }
-
+                //Get event placemarks
                 if let eventGeoLocation = eventValues["eventGeopoint"] as? PFGeoPoint
                 {
                     let userLatitude = eventGeoLocation.latitude
                     let userLongitude = eventGeoLocation.longitude
-                    
-                    print(userLatitude)
-                    print(userLongitude)
-                    
                     let userLocation = CLLocation(latitude: userLatitude, longitude: userLongitude)
                     
                     self.geocoder.reverseGeocodeLocation(userLocation) { (placemarks, error) in
@@ -257,12 +229,14 @@ class CatEventDetailsViewController: UIViewController {
                         {
                             if let placemark = placemarks?[0] as CLPlacemark!
                             {
+                                //Set sublocality
                                 if let sublocality = placemark.subLocality
                                 {
                                     self.evenLocationLabel.text = sublocality
                                 }
                                 else
                                 {
+                                    //Set locality
                                     if let locality = placemark.locality
                                     {
                                         self.evenLocationLabel.text = locality
@@ -275,7 +249,6 @@ class CatEventDetailsViewController: UIViewController {
                                 }
                             }
                         }
-                        
                     }
                 }
             }
@@ -291,17 +264,5 @@ class CatEventDetailsViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-
 
 }

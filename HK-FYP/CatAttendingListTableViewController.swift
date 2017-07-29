@@ -24,60 +24,53 @@ class CatAttendingListTableViewController: UITableViewController {
         let missingAlert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         missingAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
         }))
-        
         self.present(missingAlert, animated: true, completion: nil)
     }
 
     
     func refresh()
     {
+        //Remove elements in array to prevent duplicate items
         self.refreshAttenders.removeAll()
         self.userNames.removeAll()
         
-        let closure = refreshNames(completion: {
-            
-            print("\(self.refreshAttenders) tototototo")
+        _ = refreshNames(completion: {
             
             for numbers in self.refreshAttenders
             {
-                print("\(numbers) numbers")
+                //Query user class with users objectID
                 let userQuery = PFQuery(className: "_User")
                 userQuery.whereKey("objectId", equalTo: numbers)
                 userQuery.findObjectsInBackground(block: { (objects, error) in
                     if error != nil
                     {
-                        print(error)
+                        print(error ?? "category attending list query error")
                     }
                     else
                     {
-                        print(objects)
+                        //Loop through user object for username
                         var i = 0
                         while i < (objects?.count)!
                         {
-                            var currentObject = objects?[i]
+                            let currentObject = objects?[i]
+                            //Append users username to userNames array
                             self.userNames.append((currentObject!["chosenUsername"] as? String)!)
                             
                             i+=1
                         }
-                        
                     }
-                    print(self.userNames)
                     self.tableView.reloadData()
                 })
-                
             }
-            
-            
         })
-        
         refresher.endRefreshing()
         print("ended refreshing")
-        
     }
     
     
     func refreshNames(completion: () -> ())
     {
+        //Query chosen event for attendingUsers array
         let query = PFQuery(className: "Events")
         query.whereKey("objectId", equalTo: self.appDelegate.rowId)
         do
@@ -86,79 +79,69 @@ class CatAttendingListTableViewController: UITableViewController {
             print(object)
             if let values = object[0] as? PFObject
             {
+                //Initialize refreshAttenders array with attenders array
                 if let array = values["attenders"] as? [String]
                 {
                     self.refreshAttenders = array
                 }
             }
+            //Remove first element if its empty
             if refreshAttenders[0] == ""
             {
                 self.refreshAttenders.remove(at: 0)
             }
-            
-            print(self.refreshAttenders)
         }
         catch
         {
             print(error)
         }
         completion()
-        
     }
-    
     
     @IBAction func addAttendance2(_ sender: Any)
     {
-        
-        let userObjectId = PFUser.current()?.objectId
+        //Query events by event objectId
+        _ = PFUser.current()?.objectId
         let query = PFQuery(className: "Events")
         query.whereKey("objectId", equalTo: self.appDelegate.rowId)
         query.findObjectsInBackground { (object, error) in
             if error != nil
             {
-                print(error)
+                print(error ?? "error when adding attendance - category attending list")
             }
             else
             {
-                print(object)
-                
                 if let eventValues = object?[0]
                 {
-                    
-                    print("hello")
+                    //Get attenders array and set as attendingArrayTemo
                     if let attendingArrayTemp = eventValues["attenders"] as? [String]
                     {
                         self.attendingArray = attendingArrayTemp
+                        //Check if attending array contains users objectId
                         if self.attendingArray.contains(self.attendingUsers!)
                         {
                             self.createAlert(title: "Already Attending", message: "You are already attending this event")
                         }
                         else
                         {
+                            //Append users objectId to attendingArray
                             self.attendingArray.append(self.attendingUsers!)
-                            print(self.attendingArray)
+                            self.createAlert(title: "Success", message: "You are now attending this event")
                         }
                     }
-                    print(self.attendingArray)
                     eventValues["attenders"] = []
-                    //eventValues.saveInBackground()
+                    //Parse updated attendingArray
                     eventValues["attenders"] = self.attendingArray
                     eventValues.saveInBackground()
                 }
             }
         }
-        
-        
     }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
+    
         let acl = PFACL()
         acl.getPublicReadAccess = true
         acl.getPublicWriteAccess = true
@@ -170,13 +153,6 @@ class CatAttendingListTableViewController: UITableViewController {
         self.tableView.addSubview(refresher)
         
         refresh()
-        
-        
-        
-        
-        
-        
-        
     }
     
     override func didReceiveMemoryWarning()
@@ -196,9 +172,7 @@ class CatAttendingListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         // #warning Incomplete implementation, return the number of rows
-        
         return userNames.count
-        
     }
     
     
@@ -217,59 +191,9 @@ class CatAttendingListTableViewController: UITableViewController {
             
             let chosenCellUsername = currentCell
             self.appDelegate.attendingUsername = chosenCellUsername
-            print(self.appDelegate.attendingUsername)
-            
         }
         
+        //Seque to category attending user profile
         performSegue(withIdentifier: "toOtherUser", sender: self)
-        
-        
     }
-    
-    
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }

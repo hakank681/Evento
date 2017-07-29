@@ -20,7 +20,6 @@ class FinalRegistrationViewController: UIViewController, UINavigationControllerD
     @IBOutlet weak var lastName: UITextField!
     @IBOutlet weak var userName: UITextField!
     
-
     //Get Email and Hobbies
     func getData() -> (String, String, Dictionary<String, Bool>)
     {
@@ -38,7 +37,6 @@ class FinalRegistrationViewController: UIViewController, UINavigationControllerD
         let missingAlert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         missingAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
         }))
-        
         self.present(missingAlert, animated: true, completion: nil)
     }
 
@@ -47,41 +45,35 @@ class FinalRegistrationViewController: UIViewController, UINavigationControllerD
     {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage
         {
-
             profileImage.image = image
         }
-    
         self.dismiss(animated: true, completion: nil)
     }
- 
-    
 
- 
-    
     @IBOutlet weak var profileImage: UIImageView!
     
     // Edit Image Button
     @IBAction func editImageButton(_ sender: Any)
     {
-        
         let imagePickerController = UIImagePickerController()
         
         //Alert
         let invalidAlert = UIAlertController(title: "Select Source", message: "Please select source for your image", preferredStyle: UIAlertControllerStyle.alert)
         invalidAlert.addAction(UIAlertAction(title: "Camera Roll", style: .default, handler: { (action) in
             
+            //Set photo library as source
             imagePickerController.delegate = self
             imagePickerController.sourceType = UIImagePickerControllerSourceType.photoLibrary
             imagePickerController.allowsEditing = false
             self.present(imagePickerController, animated: true, completion: nil)
-            //self.dismiss(animated: true, completion: nil)
         }))
         invalidAlert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action) in
+            
+            //Set Camera as source
             imagePickerController.delegate = self
             imagePickerController.sourceType = UIImagePickerControllerSourceType.camera
             imagePickerController.allowsEditing = false
             self.present(imagePickerController, animated: true, completion: nil)
-            //self.dismiss(animated: true, completion: nil)
         }))
         self.present(invalidAlert, animated: true, completion: nil)
     }
@@ -93,7 +85,7 @@ class FinalRegistrationViewController: UIViewController, UINavigationControllerD
         var isTaken: Bool = false
         
         //access PFUsers
-        var query = PFQuery(className: "_User")
+        let query = PFQuery(className: "_User")
         query.whereKey("chosenUsername", equalTo: userName.text!)
         query.findObjectsInBackground { (object, error) in
             if error == nil
@@ -121,10 +113,10 @@ class FinalRegistrationViewController: UIViewController, UINavigationControllerD
     
     @IBAction func signupButton(_ sender: Any)
     {
-        var address = postcodeField.text
+        let address = postcodeField.text
         let geocoder = CLGeocoder()
         
-        
+        //Check if fields are empty
         if firstName.text == "" || lastName.text == "" || userName.text == "" || postcodeField.text == ""
         {
             createAlert(title: "Form Error", message: "Please fill in the fields")
@@ -136,15 +128,14 @@ class FinalRegistrationViewController: UIViewController, UINavigationControllerD
             geocoder.geocodeAddressString(address!) { (placemarks, error) in
                 if error != nil
                 {
-                    print(error)
+                    print(error ?? "error")
                 }
                 else
                 {
-                    if let placemark = placemarks?[0] as? CLPlacemark!
+                    if let placemark = placemarks?[0] as CLPlacemark!
                     {
-                        let lat = placemark.location?.coordinate.latitude as! Double!
-                        let lon = placemark.location?.coordinate.longitude as! Double!
-                        
+                        let lat = placemark.location?.coordinate.latitude as Double!
+                        let lon = placemark.location?.coordinate.longitude as Double!
                         let userGeopoint = PFGeoPoint(latitude: lat!, longitude: lon!)
                         let user = PFUser.current()
                         user?["userHome"] = userGeopoint
@@ -154,24 +145,15 @@ class FinalRegistrationViewController: UIViewController, UINavigationControllerD
                         print("\(placemark.subAdministrativeArea) sub administrative areafinal")
                         print("\(placemark.subLocality) sub locality final")
                         print("\(placemark.locality) locality final")
-                        
                     }
                 }
             }
             
-            self.usernameIsTaken(username: self.userName.text!)
-
-            let (userEmail, userPassword, hobbies) = getData()
+            let (_, _, hobbies) = getData()
             
-            var error : NSError?
-            
-            let jsonData = try! JSONSerialization.data(withJSONObject: hobbies, options: JSONSerialization.WritingOptions.prettyPrinted)
-            
-            let jsonString = NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue)! as String
-            
+            //Set user details
             let userHobbies = PFObject(className: "Hobbies")
             let user = PFUser.current()
-            //PFUser.current()?["firstName"] = firstName.text
             user?["firstName"] = firstName.text
             user?["lastName"] = lastName.text
             user?["chosenUsername"] = userName.text
@@ -187,17 +169,19 @@ class FinalRegistrationViewController: UIViewController, UINavigationControllerD
                 activityIndicator.startAnimating()
                 UIApplication.shared.beginIgnoringInteractionEvents()
                 
+                //Generate image data from image
                 let imageData2 = UIImageJPEGRepresentation(uploadImage, 0.75)
-                //let imageData2 = UIImagePNGRepresentation(uploadImage)
                 
+                //Generate imageFile from imageData
                 let imageFile = PFFile(name: "profile.jpeg", data: imageData2!)
 
+                //Save image
                 user?["profileImage"] = imageFile
                 user?.saveInBackground(block: { (sucess, error) in
  
                     if error != nil
                     {
-                        print(error)
+                        print(error ?? "error")
                     }
                     else
                     {
@@ -215,16 +199,14 @@ class FinalRegistrationViewController: UIViewController, UINavigationControllerD
             }
             userHobbies["user"] = PFUser.current()?.objectId
             userHobbies.saveInBackground()
-            
         }
-        let when = DispatchTime.now() + 2 // change 2 to desired number of seconds
+        
+        let when = DispatchTime.now() + 2
         DispatchQueue.main.asyncAfter(deadline: when)
         {
-            // Your code with delay
             self.activityIndicator.stopAnimating()
             self.performSegue(withIdentifier: "toHome", sender: self)
         }
-        
     }
 
 
@@ -258,17 +240,4 @@ class FinalRegistrationViewController: UIViewController, UINavigationControllerD
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-
 }

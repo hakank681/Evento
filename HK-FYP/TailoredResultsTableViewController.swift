@@ -23,13 +23,11 @@ class TailoredResultsTableViewController: UITableViewController {
     var currentUser = PFUser.current()?.objectId
     var hobbiesObject = [PFObject]()
     
+    //Refresh method
     func refresh()
     {
-        
-        
-        let closure = refreshList(completion: {
-
-                self.tableView.reloadData()
+        _ = refreshList(completion: {
+        self.tableView.reloadData()
       
         })
     }
@@ -37,12 +35,7 @@ class TailoredResultsTableViewController: UITableViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
+
         category = appDelegate.clickedCategory
         
         activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
@@ -56,20 +49,18 @@ class TailoredResultsTableViewController: UITableViewController {
         refresher.addTarget(self, action: #selector(TableViewController.refresh), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(refresher)
         
-        
+        //Query hobbies class for users favourites
         let hobbieQuery = PFQuery(className: "Hobbies")
-        hobbieQuery.whereKey("user", equalTo: currentUser)
+        hobbieQuery.whereKey("user", equalTo: self.currentUser!)
         hobbieQuery.findObjectsInBackground { (object, error) in
             if error != nil
             {
-                print(error)
+                print(error ?? "tailored results table view query error")
             }
             else
             {
-                
                 if let objects = object?[0]
                 {
-     
                     //find all categories that are true and append to array
                     if let careerAndBusiness = objects["careerAndBusiness"] as? Bool
                     {
@@ -148,42 +139,43 @@ class TailoredResultsTableViewController: UITableViewController {
                             self.userHobbies.append("technology")
                         }
                     }
-                    
+                    //Double check selected hobbies are appended accuratelt
+                    print("Below are users hobbies")
                     print(self.userHobbies)
                 }
-                
             }
-            
              self.refresh()
         }
-
-       
-
     }
-    
-   
+
     
     func refreshList(completion: () -> ())
     {
-        
+        //Remove event and eventTitles elements to ensure no duplicate events
         self.events.removeAll()
         self.eventTitles.removeAll()
         
+        //Loop users selected hobbies in userHobbies array
         for userCategories in self.userHobbies
         {
+            //Query each selected hobbie category and retrieve events
             let query = PFQuery(className: "Events")
             query.whereKey("category", equalTo: userCategories)
             do
             {
                let objects = try query.findObjects()
                 
+                //Get event title and ID and append to array
                     for events in objects
                     {
                         self.eventTitles.append(events["title"] as! String)
                         self.eventTitleAndId[events["title"] as! String] = events.objectId
-                        print("this works")
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
+                        DispatchQueue.main.async
+                        {
+                            if self.eventTitles.count > 0
+                            {
+                                self.tableView.reloadData()
+                            }
                         }
                     }
             }
@@ -191,31 +183,18 @@ class TailoredResultsTableViewController: UITableViewController {
             {
                 print(error)
             }
-   
         }
-        
-        
-        
-        
-        print(self.eventTitles)
-        print(self.eventTitleAndId)
         
         refresher.endRefreshing()
         print("ended refreshing")
      
-        
         completion()
-        
-        
-        
     }
     
-    
+    //View did appear method not currently in use
     override func viewDidAppear(_ animated: Bool)
     {
-        
-       
-        
+  
     }
     
     override func didReceiveMemoryWarning()
@@ -242,20 +221,19 @@ class TailoredResultsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        
-        // Configure the cell...
-        
-        
-        
-        let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
+
+        //Set cell font and size if require
+        //cell.textLabel?.font = UIFont(name: "Prime", size: 17)
+    
+        let when = DispatchTime.now() + 0.5
         DispatchQueue.main.asyncAfter(deadline: when)
         {
-            cell.textLabel?.text = self.eventTitles[indexPath.row]
-            
-            
+            // Set cell labels with event titles
+            if self.eventTitles.count > 0
+            {
+                cell.textLabel?.text = self.eventTitles[indexPath.row]
+            }
         }
-        
-        
         return cell
     }
     
@@ -263,62 +241,13 @@ class TailoredResultsTableViewController: UITableViewController {
     {
         
         let currentCell = tableView.cellForRow(at: indexPath)?.textLabel?.text
-        for (key,value) in self.eventTitleAndId
+        for (_,_) in self.eventTitleAndId
         {
             self.chosenEventId = self.eventTitleAndId[currentCell!]!
+            //Save ID of chosen event to app delegate for future use
             self.appDelegate.rowId = chosenEventId
         }
+        //Seque to tailored event details
         performSegue(withIdentifier: "toTailoredEventDetails", sender: self)
-        print(self.chosenEventId)
     }
-    
-    
-    
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
-
-
-    }
+}

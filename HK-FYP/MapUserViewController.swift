@@ -22,14 +22,15 @@ class MapUserViewController: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        //Query user class for users details
         let clickedUsername = appDelegate.attendingUsername
         let query = PFQuery(className: "_User")
         query.whereKey("chosenUsername", equalTo: clickedUsername)
         query.findObjectsInBackground { (objects, error) in
             if error != nil
             {
-                print(error)
+                print(error ?? "error in mapUserViewController")
             }
             else
             {
@@ -41,7 +42,7 @@ class MapUserViewController: UIViewController {
                         profileImage.getDataInBackground { (data, error) in
                             if error != nil
                             {
-                                print(error ?? nil)
+                                print(error ?? "error when retrieving image MapUserViewController")
                             }
                             else
                             {
@@ -54,15 +55,15 @@ class MapUserViewController: UIViewController {
                                 self.usersImage.layer.cornerRadius = self.usersImage.frame.height/2
                                 self.usersImage.layer.cornerRadius = self.usersImage.frame.width/2
                                 self.usersImage.clipsToBounds = true
-                                print("imagSet")
+                                print("imageSet")
                             }
                         }
                     }
                     
+                    //Set users name
                     if let firstName = object["firstName"] as? String, let lastName = object["lastName"] as? String
                     {
                         let finalName = ""+firstName+" "+lastName
-                        print(finalName)
                         self.usersName.text = finalName
                     }
                     
@@ -73,33 +74,32 @@ class MapUserViewController: UIViewController {
                     {
                         let userLatitude = geouserLocation.latitude
                         let userLongitude = geouserLocation.longitude
-                        
-                        print(userLatitude)
-                        print(userLongitude)
-                        
                         let userLocation = CLLocation(latitude: userLatitude, longitude: userLongitude)
                         
                         self.geocoder.reverseGeocodeLocation(userLocation) { (placemarks, error) in
                             if error != nil
                             {
-                                print(error)
+                                print(error ?? "error when getting location map user ")
                             }
                             else
                             {
-                                if let placemark = placemarks?[0] as? CLPlacemark!
+                                if let placemark = placemarks?[0] as CLPlacemark!
                                 {
+                                    //Set sublocality
                                     if let sublocality = placemark.subLocality
                                     {
                                         self.usersLocation.text = sublocality
                                     }
                                     else
                                     {
+                                        //Set locality
                                         if let locality = placemark.locality
                                         {
                                             self.usersLocation.text = locality
                                         }
                                         else
                                         {
+                                            //Set entered postcode
                                             self.usersLocation.text = self.appDelegate.postcode
                                         }
                                         
@@ -107,16 +107,10 @@ class MapUserViewController: UIViewController {
                                     print("\(placemark.subAdministrativeArea) sub administrative area")
                                     print("\(placemark.subLocality) sub locality")
                                     print("\(placemark.locality) locality")
-                                    
                                 }
                             }
-                            
                         }
-                        
                     }
-                    
-                    
-                    
                 }
             }
         }
@@ -124,22 +118,7 @@ class MapUserViewController: UIViewController {
     
     override func didReceiveMemoryWarning()
     {
-        
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
-
-
 }

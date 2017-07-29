@@ -7,11 +7,13 @@
 * of patent rights can be found in the PATENTS file in the same directory.
 */
 
+
 import UIKit
 import Parse
 
 class ViewController: UIViewController {
     
+    //Applicaion is in sign up mode by default
     var signupMode = true
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var activityIndicator = UIActivityIndicatorView()
@@ -24,24 +26,20 @@ class ViewController: UIViewController {
     @IBOutlet weak var forgotPasswordOutlet: UIButton!
     
     
-    
-    
-    
     //email validity vhecker
-    func emailValid(emailString:String) -> Bool {
+    func emailValid(emailString:String) -> Bool
+    {
         let regularExpression = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
         let tester = NSPredicate(format:"SELF MATCHES %@", regularExpression)
         return tester.evaluate(with: emailString)
     }
     
     //Alert Creator function
-    func createAlert(title: String, message: String){
-        
+    func createAlert(title: String, message: String)
+    {
         let missingAlert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         missingAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
-            
         }))
-        
         self.present(missingAlert, animated: true, completion: nil)
     }
     
@@ -95,9 +93,9 @@ class ViewController: UIViewController {
             //Passes text into email validity checker
             if let emailtext = emailTextField.text
             {
-                
                 if emailValid(emailString: emailtext) == false
                 {
+                    //Create Aler if email is invalid
                     createAlert(title: "Error In Form", message: "Please enter a valid email address")
                 }
                 else
@@ -105,6 +103,7 @@ class ViewController: UIViewController {
                     let taken = usernameIsTaken(username: emailTextField.text!)
                     if taken == true && signupMode == true
                     {
+                        //Create alert if user already exists
                         self.createAlert(title: "User exists", message: "Please LogIn")
                     }
                 }
@@ -113,7 +112,6 @@ class ViewController: UIViewController {
             if signupMode == true
             {
                 //Signup mode
-                
                 let user = PFUser()
                 user.username = emailTextField.text
                 user.email = emailTextField.text
@@ -123,27 +121,25 @@ class ViewController: UIViewController {
                     
                     self.activityIndicator.stopAnimating()
                     UIApplication.shared.endIgnoringInteractionEvents()
-                    
                     if error != nil
                     {
                         var displayErrorMessage = "Please try again later."
-                        
                         let error = error as NSError?
                         
                         if let errorMessage = error?.userInfo["error"] as? String
                         {
                             displayErrorMessage = errorMessage
                         }
+                        //Create alert displaying error from Parse
                         self.createAlert(title: "Error", message: displayErrorMessage)
                         
                     }
                     else
                     {
+                        //User email and password registered
                         print("user signed up")
                     }
-                    
                 })
-                
                 
                 UIApplication.shared.endIgnoringInteractionEvents()
                 self.performSegue(withIdentifier: "toHobbies", sender: self)
@@ -151,7 +147,6 @@ class ViewController: UIViewController {
             else
             {
                 //LogIn Mode
-                
                 PFUser.logInWithUsername(inBackground: emailTextField.text!, password: passwordTextField.text!, block: { (user, error) in
                     self.activityIndicator.stopAnimating()
                     
@@ -165,12 +160,17 @@ class ViewController: UIViewController {
                         {
                             displayErrorMessage = errorMessage
                         }
+                        //create alert with error message from parse
                         self.createAlert(title: "Login Error", message: displayErrorMessage)
+                        
+                        //Make forgotPasswordButton visible
                         self.forgotPasswordOutlet.alpha = 1
                     }
                     else
                     {
+                        //Successfully Logged in
                         print("Logged in")
+                        //Segue to homepage - HomeViewController
                         self.performSegue(withIdentifier: "toHome", sender: self)
                        
                     }
@@ -213,11 +213,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
     }
     
+    //Hide keyboard when user touches blank area
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
     {
         self.view.endEditing(true)
     }
     
+    //Hide keyboard when return key is pressed 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool
     {
         textField.resignFirstResponder()

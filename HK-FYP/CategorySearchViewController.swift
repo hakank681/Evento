@@ -23,13 +23,10 @@ class CategorySearchViewController: UIViewController {
     @IBOutlet weak var foodAndDrink: UIImageView!
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
 
-    
     func imageTapped(gestureRecognizer: UITapGestureRecognizer) {
         
-    
-        print("imagetapped")
+        //Save tag of selected category in app delegate
         let tappedImage = gestureRecognizer.view
         if let tappedCat = tappedImage?.tag
         {
@@ -78,7 +75,7 @@ class CategorySearchViewController: UIViewController {
                 self.appDelegate.clickedCategory = "foodAndDrink"
             }
         }
-     
+        //Segue to selected category results
         performSegue(withIdentifier: "toNavController", sender: self)
     }
   
@@ -87,6 +84,8 @@ class CategorySearchViewController: UIViewController {
     {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        //Set Tags for each category image views
         gaming.tag = 1
         dancing.tag = 2
         sportsAndFitness.tag = 3
@@ -99,7 +98,7 @@ class CategorySearchViewController: UIViewController {
         careerAndBusiness.tag = 10
         foodAndDrink.tag = 11
         
-        
+        //Add geture recognizer to all category images
         let gamingTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(gestureRecognizer:)))
         let dancingTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(gestureRecognizer:)))
         let sportsAndFitnessTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(gestureRecognizer:)))
@@ -123,9 +122,6 @@ class CategorySearchViewController: UIViewController {
         technology.addGestureRecognizer(technologyTapRecognizer)
         careerAndBusiness.addGestureRecognizer(careerAndBusinessTapRecognizer)
         foodAndDrink.addGestureRecognizer(foodAndDrinkTapRecognizer)
-        
-
-        
     }
 
     override func didReceiveMemoryWarning()
@@ -133,16 +129,4 @@ class CategorySearchViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -21,38 +21,37 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     var locationManager = CLLocationManager()
     let geocoder = CLGeocoder()
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    let tabBar = UITabBar()
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool)
+    {
         super.viewWillAppear(animated)
-        
         // Hide the navigation bar on the this view controller
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool)
+    {
         super.viewWillDisappear(animated)
-        
         // Show the navigation bar on other view controllers
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
+    //Log out user
     @IBAction func logoutButton(_ sender: Any)
     {
         PFUser.logOut()
-        //performSegue(withIdentifier: "logout", sender: self)
-        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: "firstView") as! ViewController
         self.present(controller, animated: true, completion: { () -> Void in
         })
-     
     }
     
     @IBAction func favButton(_ sender: Any)
     {
+        //Seque to user settings
         performSegue(withIdentifier: "toFavs", sender: self)
-        
-       
+
     }
     
     
@@ -70,12 +69,9 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
-      
-        
+
+        //Get user profile image
         let currentUser = PFUser.current()
-    
         if let profileImage = currentUser?.object(forKey: "profileImage") as? PFFile
         {
             profileImage.getDataInBackground { (data, error) in
@@ -85,6 +81,7 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
                 }
                 else
                 {
+                    //Set ImageView size and attributes
                     let finalImage = UIImage(data: data!)
                     self.profilePicture.image = finalImage
                     self.profilePicture.layer.borderWidth = 1
@@ -107,14 +104,11 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         nameSurname.text = ""+firstName+" "+lastName
         username.text = userName
         
+            //Get user location
             if let geouserLocation = currentUser?.object(forKey: "userHome") as? PFGeoPoint
             {
                 let userLatitude = geouserLocation.latitude
                 let userLongitude = geouserLocation.longitude
-                
-                print(userLatitude)
-                print(userLongitude)
-                
                 let userLocation = CLLocation(latitude: userLatitude, longitude: userLongitude)
                 
                 self.geocoder.reverseGeocodeLocation(userLocation) { (placemarks, error) in
@@ -126,18 +120,21 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
                     {
                         if let placemark = placemarks?[0] as CLPlacemark!
                         {
+                            //Set sublocality
                             if let sublocality = placemark.subLocality
                             {
                                 self.location.text = sublocality
                             }
                             else
                             {
+                                //Set locality
                                 if let locality = placemark.locality
                                 {
                                     self.location.text = locality
                                 }
                                 else
                                 {
+                                    //Set chosen postcode
                                     self.location.text = self.appDelegate.postcode
                                 }
                                 
@@ -145,19 +142,14 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
                             print("\(placemark.subAdministrativeArea) sub administrative area")
                             print("\(placemark.subLocality) sub locality")
                             print("\(placemark.locality) locality")
-                            
                         }
                     }
-                    
                 }
-                
             }
-  
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
-       
     }
 
     override func didReceiveMemoryWarning()
@@ -165,16 +157,4 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

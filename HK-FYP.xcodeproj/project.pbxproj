@@ -18,10 +18,18 @@
 		81BA81791A49E0DB00E65899 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA81781A49E0DB00E65899 /* AudioToolbox.framework */; };
 		81BA817B1A49E0E500E65899 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA817A1A49E0E500E65899 /* SystemConfiguration.framework */; };
 		81BA817F1A49E0F000E65899 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA817E1A49E0F000E65899 /* libstdc++.6.dylib */; };
+		F915412B1EA3B71E00B83E86 /* tailoredButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F915412A1EA3B71E00B83E86 /* tailoredButton.png */; };
+		F915412D1EA3B91000B83E86 /* loginButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F915412C1EA3B91000B83E86 /* loginButton.png */; };
+		F915412F1EA3B91600B83E86 /* nextButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F915412E1EA3B91600B83E86 /* nextButton.png */; };
+		F91541311EA3B96B00B83E86 /* tailoredButtonPink.png in Resources */ = {isa = PBXBuildFile; fileRef = F91541301EA3B96B00B83E86 /* tailoredButtonPink.png */; };
+		F91541331EA3B9A000B83E86 /* addEventButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F91541321EA3B9A000B83E86 /* addEventButton.png */; };
+		F91541351EA3B9BF00B83E86 /* sendButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F91541341EA3B9BF00B83E86 /* sendButton.png */; };
+		F91541371EA3BA4500B83E86 /* changePasswordButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F91541361EA3BA4500B83E86 /* changePasswordButton.png */; };
+		F91541391EA3BA5500B83E86 /* whosGoingButtonPink.png in Resources */ = {isa = PBXBuildFile; fileRef = F91541381EA3BA5500B83E86 /* whosGoingButtonPink.png */; };
+		F915413B1EA3BB6A00B83E86 /* changePasswordButtonRed.png in Resources */ = {isa = PBXBuildFile; fileRef = F915413A1EA3BB6A00B83E86 /* changePasswordButtonRed.png */; };
+		F915413D1EA3BB7000B83E86 /* sendButtonGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = F915413C1EA3BB7000B83E86 /* sendButtonGreen.png */; };
 		F9768DB81E7B980700CF7776 /* CatAttendingListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9768DB71E7B980700CF7776 /* CatAttendingListTableViewController.swift */; };
 		F9768DBA1E80343200CF7776 /* CatOtherUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9768DB91E80343200CF7776 /* CatOtherUserViewController.swift */; };
-		F9768DBE1E81C49800CF7776 /* loginButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F9768DBD1E81C49800CF7776 /* loginButton.png */; };
-		F9768DC01E81C4EC00CF7776 /* nextButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F9768DBF1E81C4EC00CF7776 /* nextButton.png */; };
 		F9768DC21E81C8A400CF7776 /* AddButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F9768DC11E81C8A400CF7776 /* AddButton.png */; };
 		F9768DC41E81CAFB00CF7776 /* whosgoingButton.png in Resources */ = {isa = PBXBuildFile; fileRef = F9768DC31E81CAFB00CF7776 /* whosgoingButton.png */; };
 		F991ADD71EA270E70075BE0A /* TailoredOtherUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F991ADD61EA270E70075BE0A /* TailoredOtherUserViewController.swift */; };
@@ -99,17 +107,25 @@
 		81BA817E1A49E0F000E65899 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		81BA81801A49E10C00E65899 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		ED1DA9F2CEF343D19928B006 /* Pods_HK_FYP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HK_FYP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F915412A1EA3B71E00B83E86 /* tailoredButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tailoredButton.png; sourceTree = "<group>"; };
+		F915412C1EA3B91000B83E86 /* loginButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginButton.png; sourceTree = "<group>"; };
+		F915412E1EA3B91600B83E86 /* nextButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nextButton.png; sourceTree = "<group>"; };
+		F91541301EA3B96B00B83E86 /* tailoredButtonPink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tailoredButtonPink.png; sourceTree = "<group>"; };
+		F91541321EA3B9A000B83E86 /* addEventButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addEventButton.png; sourceTree = "<group>"; };
+		F91541341EA3B9BF00B83E86 /* sendButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sendButton.png; sourceTree = "<group>"; };
+		F91541361EA3BA4500B83E86 /* changePasswordButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = changePasswordButton.png; sourceTree = "<group>"; };
+		F91541381EA3BA5500B83E86 /* whosGoingButtonPink.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whosGoingButtonPink.png; sourceTree = "<group>"; };
+		F915413A1EA3BB6A00B83E86 /* changePasswordButtonRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = changePasswordButtonRed.png; sourceTree = "<group>"; };
+		F915413C1EA3BB7000B83E86 /* sendButtonGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sendButtonGreen.png; sourceTree = "<group>"; };
 		F9768DB71E7B980700CF7776 /* CatAttendingListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatAttendingListTableViewController.swift; sourceTree = "<group>"; };
 		F9768DB91E80343200CF7776 /* CatOtherUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatOtherUserViewController.swift; sourceTree = "<group>"; };
-		F9768DBD1E81C49800CF7776 /* loginButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = loginButton.png; path = Buttons/loginButton.png; sourceTree = "<group>"; };
-		F9768DBF1E81C4EC00CF7776 /* nextButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nextButton.png; path = Buttons/nextButton.png; sourceTree = "<group>"; };
 		F9768DC11E81C8A400CF7776 /* AddButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AddButton.png; path = Buttons/AddButton.png; sourceTree = "<group>"; };
 		F9768DC31E81CAFB00CF7776 /* whosgoingButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = whosgoingButton.png; path = Buttons/whosgoingButton.png; sourceTree = "<group>"; };
 		F991ADD61EA270E70075BE0A /* TailoredOtherUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TailoredOtherUserViewController.swift; sourceTree = "<group>"; };
 		F991ADD81EA292C70075BE0A /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		F991ADDA1EA2A1880075BE0A /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		F9A8698D1E6B55D800229FF7 /* FinalRegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinalRegistrationViewController.swift; sourceTree = "<group>"; };
-		F9A8698F1E6B61BD00229FF7 /* HobbiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HobbiesViewController.swift; path = ../HobbiesViewController.swift; sourceTree = "<group>"; };
+		F9A8698F1E6B61BD00229FF7 /* HobbiesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HobbiesViewController.swift; sourceTree = "<group>"; };
 		F9A869911E70861000229FF7 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F9A869951E71D76B00229FF7 /* FavouritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouritesViewController.swift; sourceTree = "<group>"; };
 		F9AFC4891E9FE07500DE1F07 /* EventsOnMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsOnMapViewController.swift; sourceTree = "<group>"; };
@@ -302,9 +318,17 @@
 		F91BE67F1EA1D8C50034AF3F /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				F915412E1EA3B91600B83E86 /* nextButton.png */,
+				F915412C1EA3B91000B83E86 /* loginButton.png */,
+				F91541341EA3B9BF00B83E86 /* sendButton.png */,
+				F915413A1EA3BB6A00B83E86 /* changePasswordButtonRed.png */,
+				F915413C1EA3BB7000B83E86 /* sendButtonGreen.png */,
+				F91541381EA3BA5500B83E86 /* whosGoingButtonPink.png */,
+				F91541361EA3BA4500B83E86 /* changePasswordButton.png */,
+				F91541321EA3B9A000B83E86 /* addEventButton.png */,
+				F915412A1EA3B71E00B83E86 /* tailoredButton.png */,
+				F91541301EA3B96B00B83E86 /* tailoredButtonPink.png */,
 				F9768DC31E81CAFB00CF7776 /* whosgoingButton.png */,
-				F9768DBD1E81C49800CF7776 /* loginButton.png */,
-				F9768DBF1E81C4EC00CF7776 /* nextButton.png */,
 				F9768DC11E81C8A400CF7776 /* AddButton.png */,
 			);
 			name = Buttons;
@@ -407,16 +431,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F91541391EA3BA5500B83E86 /* whosGoingButtonPink.png in Resources */,
 				F9D6415F1E988A7400664B34 /* Icon.png in Resources */,
 				F9D6415E1E988A7400664B34 /* Icon-Small@3x.png in Resources */,
+				F91541351EA3B9BF00B83E86 /* sendButton.png in Resources */,
 				F9D641641E988C0F00664B34 /* FypLogo.png in Resources */,
 				F9C326681E7AF13D00EC2126 /* fashionAndBeauty.png in Resources */,
+				F915412D1EA3B91000B83E86 /* loginButton.png in Resources */,
 				F9768DC21E81C8A400CF7776 /* AddButton.png in Resources */,
 				F9C326701E7AF37400EC2126 /* avatar1.png in Resources */,
 				F9D6415A1E988A7400664B34 /* Icon-Small-50.png in Resources */,
 				F9D641681E9947E000664B34 /* Prime Regular.otf in Resources */,
+				F915413D1EA3BB7000B83E86 /* sendButtonGreen.png in Resources */,
 				F9D641531E988A7400664B34 /* Icon-72.png in Resources */,
 				F9D6415C1E988A7400664B34 /* Icon-Small.png in Resources */,
+				F915413B1EA3BB6A00B83E86 /* changePasswordButtonRed.png in Resources */,
 				F9C3266C1E7AF26800EC2126 /* sportsAndFitness.png in Resources */,
 				F9D641661E9946D700664B34 /* homeLogo.png in Resources */,
 				F9D641601E988A7400664B34 /* Icon@2x.png in Resources */,
@@ -425,7 +454,6 @@
 				F9C326611E7AF04100EC2126 /* film.png in Resources */,
 				F9D641541E988A7400664B34 /* Icon-72@2x.png in Resources */,
 				F9C326621E7AF04100EC2126 /* gaming.png in Resources */,
-				F9768DBE1E81C49800CF7776 /* loginButton.png in Resources */,
 				F9D6415B1E988A7400664B34 /* Icon-Small-50@2x.png in Resources */,
 				F9D641571E988A7400664B34 /* Icon-83.5@2x.png in Resources */,
 				F9D641581E988A7400664B34 /* Icon-Small-40.png in Resources */,
@@ -433,13 +461,17 @@
 				F9C326601E7AF04100EC2126 /* dancing.png in Resources */,
 				F9D641511E988A7400664B34 /* Icon-60@2x.png in Resources */,
 				814C3ACB1B69877600E307BB /* Images.xcassets in Resources */,
+				F91541371EA3BA4500B83E86 /* changePasswordButton.png in Resources */,
 				F9D641591E988A7400664B34 /* Icon-Small-40@2x.png in Resources */,
 				F9C3266A1E7AF20F00EC2126 /* outdoorAndAdventure.png in Resources */,
+				F915412F1EA3B91600B83E86 /* nextButton.png in Resources */,
 				F9768DC41E81CAFB00CF7776 /* whosgoingButton.png in Resources */,
 				F9D641551E988A7400664B34 /* Icon-76.png in Resources */,
 				F9D641561E988A7400664B34 /* Icon-76@2x.png in Resources */,
-				F9768DC01E81C4EC00CF7776 /* nextButton.png in Resources */,
 				F9D641621E988A7400664B34 /* iTunesArtwork@2x in Resources */,
+				F915412B1EA3B71E00B83E86 /* tailoredButton.png in Resources */,
+				F91541331EA3B9A000B83E86 /* addEventButton.png in Resources */,
+				F91541311EA3B96B00B83E86 /* tailoredButtonPink.png in Resources */,
 				F9C326721E7AF3B900EC2126 /* photography.png in Resources */,
 				F9D641611E988A7400664B34 /* iTunesArtwork in Resources */,
 				F9D641521E988A7400664B34 /* Icon-60@3x.png in Resources */,

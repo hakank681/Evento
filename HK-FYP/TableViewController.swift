@@ -23,11 +23,7 @@ class TableViewController: UITableViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+
         activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
@@ -43,9 +39,11 @@ class TableViewController: UITableViewController {
     
     func refresh()
     {
+        //Remove array elements to prevent duplicate items
         self.events.removeAll()
         self.eventTitles.removeAll()
         
+        //Query events class
         let query = PFQuery(className: "Events")
         query.findObjectsInBackground { (object, error) in
             if error != nil
@@ -70,15 +68,16 @@ class TableViewController: UITableViewController {
                         {
                             self.eventTitles.append(title)
                             self.eventTitleAndId[title] = eventID
-                            
                         }
                         i += 1
                     }
-                    print(self.eventTitleAndId)
-                    print(self.eventTitles)
                 }
             }
-            self.tableView.reloadData()
+            if self.eventTitles.count > 1
+            {
+              self.tableView.reloadData()
+            }
+            
         }
         refresher.endRefreshing()
         print("ended refreshing")
@@ -117,17 +116,15 @@ class TableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
         // Configure the cell...
-       
-      
-        
-        let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
+
+        let when = DispatchTime.now() + 0.5
         DispatchQueue.main.asyncAfter(deadline: when)
         {
-        cell.textLabel?.text = self.eventTitles[indexPath.row]
-        
-            
+            if self.eventTitles.count > 0
+            {
+                cell.textLabel?.text = self.eventTitles[indexPath.row]
+            }
         }
-        
         
         return cell
     }
@@ -136,60 +133,12 @@ class TableViewController: UITableViewController {
     {
         
         let currentCell = tableView.cellForRow(at: indexPath)?.textLabel?.text
-        for (key,value) in self.eventTitleAndId
+        for (_,_) in self.eventTitleAndId
         {
             self.chosenEventId = self.eventTitleAndId[currentCell!]!
             self.appDelegate.rowId = chosenEventId
         }
+        //Seque to event details
         performSegue(withIdentifier: "toEventDetails", sender: self)
-        print(self.chosenEventId)
     }
-    
- 
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

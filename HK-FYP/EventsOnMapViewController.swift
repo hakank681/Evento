@@ -28,28 +28,18 @@ class EventsOnMapViewController: UIViewController, MKMapViewDelegate, CLLocation
         self.map.setRegion(region, animated: true)
     }
     
-
-    
-    
-    
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView)
     {
-       
         if let annotationTitle = mapView.selectedAnnotations[0].title
         {
             if let selectedEvent = annotationTitle
             {
-                print(selectedEvent)
+                //Save selectedEvent to app delegate for future use
                 self.appDelegate.clickedMapEvent = selectedEvent
             }
-            
         }
-    
-        
-        
+        //Segue to selected pin event details
           performSegue(withIdentifier: "toMapEvent", sender: self)
-        
-        
     }
     
     
@@ -74,46 +64,35 @@ class EventsOnMapViewController: UIViewController, MKMapViewDelegate, CLLocation
         self.eventLongitudes.removeAll()
         self.eventLatitudes.removeAll()
         
+        //Query all events with geoPoints
         let query = PFQuery(className: "Events")
         query.whereKeyExists("eventGeopoint")
         query.findObjectsInBackground { (objects, error) in
             if error != nil
             {
-                print(error ?? "error")
+                print(error ?? "error retrieving geopoints eventsOnMapVC")
             }
             else
             {
-                
+                //Loop through objects and retrieve title and eventGeoPoint
                 for object in objects!
                 {
+                    //Append event titles to eventNames array
                     self.eventNames.append(object["title"] as! String)
+                    
+                    //Append eventGeopoints to eventGeopoints array
                     self.eventGeopoints.append(object["eventGeopoint"] as! PFGeoPoint)
                     self.eventLatitudes.append(self.eventGeopoints.last?.latitude as CLLocationDegrees!)
                     self.eventLongitudes.append(self.eventGeopoints.last?.longitude as CLLocationDegrees!)
                     
+                    //Create annotations for event
                     let annotation = MKPointAnnotation()
                     annotation.coordinate = CLLocationCoordinate2DMake(self.eventLatitudes.last!, self.eventLongitudes.last!)
                     annotation.title = self.eventNames.last!
                     self.map.addAnnotation(annotation)
                     self.map.showsUserLocation = true
                 }
-                print(self.eventGeopoints)
             }
         }
-
     }
-    
-   
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

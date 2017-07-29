@@ -22,14 +22,15 @@ class OtherUserViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+   
+        //Query user class for clicked user
         let clickedUsername = appDelegate.attendingUsername
         let query = PFQuery(className: "_User")
         query.whereKey("chosenUsername", equalTo: clickedUsername)
         query.findObjectsInBackground { (objects, error) in
             if error != nil
             {
-                print(error ?? nil ?? "error")
+                print(error ?? nil ?? "error in query - otherUserVC")
             }
             else
             {
@@ -41,7 +42,7 @@ class OtherUserViewController: UIViewController
                         profileImage.getDataInBackground { (data, error) in
                             if error != nil
                             {
-                                print(error ?? nil ?? "error")
+                                print(error ?? nil ?? "error retrieving image")
                             }
                             else
                             {
@@ -54,18 +55,16 @@ class OtherUserViewController: UIViewController
                                 self.usersImage.layer.cornerRadius = self.usersImage.frame.height/2
                                 self.usersImage.layer.cornerRadius = self.usersImage.frame.width/2
                                 self.usersImage.clipsToBounds = true
-                                print("imagSet")
+                                print("imageSet")
                             }
                         }
                     }
-                    
+                    //Get users first and last name
                     if let firstName = object["firstName"] as? String, let lastName = object["lastName"] as? String
                     {
                         let finalName = ""+firstName+" "+lastName
-                        print(finalName)
                         self.usersName.text = finalName
                     }
-                    
                     self.usersUsername.text = self.appDelegate.attendingUsername
                     
                     //get location of user thats attending
@@ -73,33 +72,32 @@ class OtherUserViewController: UIViewController
                     {
                         let userLatitude = geouserLocation.latitude
                         let userLongitude = geouserLocation.longitude
-                        
-                        print(userLatitude)
-                        print(userLongitude)
-                        
                         let userLocation = CLLocation(latitude: userLatitude, longitude: userLongitude)
                         
                         self.geocoder.reverseGeocodeLocation(userLocation) { (placemarks, error) in
                             if error != nil
                             {
-                                print(error ?? "error")
+                                print(error ?? "error getting user geocode location")
                             }
                             else
                             {
                                 if let placemark = placemarks?[0] as CLPlacemark!
                                 {
+                                    //Set sublocality
                                     if let sublocality = placemark.subLocality
                                     {
                                         self.usersLocation.text = sublocality
                                     }
                                     else
                                     {
+                                        //Set locality
                                         if let locality = placemark.locality
                                         {
                                             self.usersLocation.text = locality
                                         }
                                         else
                                         {
+                                            //Set selected postcode
                                             self.usersLocation.text = self.appDelegate.postcode
                                         }
                                         
@@ -107,16 +105,10 @@ class OtherUserViewController: UIViewController
                                     print("\(placemark.subAdministrativeArea) sub administrative area")
                                     print("\(placemark.subLocality) sub locality")
                                     print("\(placemark.locality) locality")
-                                    
                                 }
                             }
-                            
                         }
-                        
                     }
-                    
-                    
-
                 }
             }
         }
@@ -128,16 +120,5 @@ class OtherUserViewController: UIViewController
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

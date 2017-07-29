@@ -30,15 +30,14 @@ class FavouritesViewController: UIViewController
     var hobbieDict = [String : Bool]()
     let hobbyNames: [String] = ["careerAndBusiness", "dancing", "fashionAndBeauty", "film", "foodAndDrink", "gaming", "music", "outdoorAndAdventure", "photography", "sportsAndFitness", "technology"]
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool)
+    {
         super.viewWillAppear(animated)
         
         // Hide the navigation bar on the this view controller
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
       
     }
-    
-    
     
     //check if switch changes
     func switchIsChanged(mySwitch: UISwitch) -> Bool
@@ -71,34 +70,30 @@ class FavouritesViewController: UIViewController
         hobbieDict["photography"] = switchIsChanged(mySwitch: photography)
         performSegue(withIdentifier: "toProfile", sender: self)
         
-        let user = PFUser.current()
+        //Query Hobbies class with users row
+        let user = PFUser.current()?.objectId
         let someQuery = PFQuery(className: "Hobbies")
-        someQuery.whereKey("user", equalTo: user?.objectId)
+        someQuery.whereKey("user", equalTo: user!)
         someQuery.findObjectsInBackground { (object, error) in
             if error != nil
             {
-                print(error)
+                print(error ?? "error")
             }
             else
             {
-                if var userHobbies = object?[0]
+                if let userHobbies = object?[0]
                 {
-                    print(userHobbies)
+                    //Loop through updated hobbieDict and set new values
                     for (key, value) in self.hobbieDict
                     {
                         userHobbies[key] = value
                     }
-                    //userHobbies["user"] = PFUser.current()?.objectId
                     userHobbies.saveInBackground()
                 }
             }
-
         }
-        
-        
     }
-    
-     
+
     
     func getHobbies()
     {
@@ -123,14 +118,14 @@ class FavouritesViewController: UIViewController
         switchDict["gaming"] = gaming
         switchDict["photography"] = photography
         
-        let user = PFUser.current()
+        //Query hobbies class and get users hobbies
+        let user = PFUser.current()?.objectId
         let query = PFQuery(className: "Hobbies")
-        query.whereKey("user", equalTo: user?.objectId)
+        query.whereKey("user", equalTo: user!)
         query.findObjectsInBackground { (objects, error) in
             if error != nil
             {
                 print(error!)
-                print("hello")
             }
             else
             {
@@ -151,6 +146,7 @@ class FavouritesViewController: UIViewController
                 
                     for (hobbieKey, hobbieValue) in self.hobbieDict
                     {
+                        //Set UISwitch for selected hobbies
                         if hobbieValue == true
                         {
                             let trueSwitch = self.switchDict[hobbieKey]
@@ -158,22 +154,16 @@ class FavouritesViewController: UIViewController
                         }
                     }
             }
-            
             self.activityIndicator.stopAnimating()
             UIApplication.shared.endIgnoringInteractionEvents()
         }
     }
-    
-    
-    
+
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-       
         getHobbies()
-        print(self.hobbieDict)
     }
     
 
@@ -182,16 +172,5 @@ class FavouritesViewController: UIViewController
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

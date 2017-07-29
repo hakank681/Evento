@@ -22,19 +22,21 @@ class TailoredOtherUserViewController: UIViewController {
     {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        // Find details of clicked user
         let clickedUsername = appDelegate.attendingUsername
         let query = PFQuery(className: "_User")
         query.whereKey("chosenUsername", equalTo: clickedUsername)
         query.findObjectsInBackground { (objects, error) in
             if error != nil
             {
-                print(error ?? "error")
+                print(error ?? "Tailored Other User not found")
             }
             else
             {
                 if let object = objects?[0]
                 {
-                    //set profile image
+                    //Set profile image
                     if let profileImage = object["profileImage"] as? PFFile
                     {
                         profileImage.getDataInBackground { (data, error) in
@@ -57,7 +59,7 @@ class TailoredOtherUserViewController: UIViewController {
                             }
                         }
                     }
-                    
+                    //Set first and last name
                     if let firstName = object["firstName"] as? String, let lastName = object["lastName"] as? String
                     {
                         let finalName = ""+firstName+" "+lastName
@@ -72,33 +74,32 @@ class TailoredOtherUserViewController: UIViewController {
                     {
                         let userLatitude = geouserLocation.latitude
                         let userLongitude = geouserLocation.longitude
-                        
-                        print(userLatitude)
-                        print(userLongitude)
-                        
                         let userLocation = CLLocation(latitude: userLatitude, longitude: userLongitude)
                         
                         self.geocoder.reverseGeocodeLocation(userLocation) { (placemarks, error) in
                             if error != nil
                             {
-                                print(error ?? "error")
+                                print(error ?? "Tailored attending user location error")
                             }
                             else
                             {
                                 if let placemark = placemarks?[0] as CLPlacemark!
                                 {
+                                    //Set Sublocality
                                     if let sublocality = placemark.subLocality
                                     {
                                         self.usersLocation.text = sublocality
                                     }
                                     else
                                     {
+                                        //Set Locality
                                         if let locality = placemark.locality
                                         {
                                             self.usersLocation.text = locality
                                         }
                                         else
                                         {
+                                            //Set entered postcode
                                             self.usersLocation.text = self.appDelegate.postcode
                                         }
                                         
@@ -109,13 +110,8 @@ class TailoredOtherUserViewController: UIViewController {
                                     
                                 }
                             }
-                            
                         }
-                        
                     }
-                    
-                    
-                    
                 }
             }
         }
@@ -127,16 +123,5 @@ class TailoredOtherUserViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
 
 }
